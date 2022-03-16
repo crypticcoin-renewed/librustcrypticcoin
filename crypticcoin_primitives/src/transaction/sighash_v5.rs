@@ -27,7 +27,7 @@ use crate::transaction::{components::tze, sighash::TzeInput, TzeDigests};
 const CRYPTICCOIN_TRANSPARENT_INPUT_HASH_PERSONALIZATION: &[u8; 16] = b"Crypt___TxInHash";
 
 #[cfg(feature = "zfuture")]
-const CRYPTICCOIN_TZE_INPUT_HASH_PERSONALIZATION: &[u8; 16] = b"Zcash__TzeInHash";
+const CRYPTICCOIN_TZE_INPUT_HASH_PERSONALIZATION: &[u8; 16] = b"CRYPTICCOIN__TzeInHash";
 
 fn hasher(personal: &[u8; 16]) -> State {
     Params::new().hash_length(32).personal(personal).to_state()
@@ -72,7 +72,7 @@ fn transparent_input_sigdigests<A: transparent::Authorization>(
     //   b. scriptCode of the input (serialized as scripts inside CTxOuts)
     //   c. value of the output spent by this input (8-byte little endian)
     //   d. nSequence of the input (4-byte little endian)
-    let mut ch = hasher(ZCASH_TRANSPARENT_INPUT_HASH_PERSONALIZATION);
+    let mut ch = hasher(CRYPTICCOIN_TRANSPARENT_INPUT_HASH_PERSONALIZATION);
     let txin = &bundle.vin[input.index()];
     txin.prevout.write(&mut ch).unwrap();
     input.script_code().write(&mut ch).unwrap();
@@ -94,7 +94,7 @@ fn tze_input_sigdigests<A: tze::Authorization>(
     input: &TzeInput<'_>,
     txid_digests: &TzeDigests<Blake2bHash>,
 ) -> TzeDigests<Blake2bHash> {
-    let mut ch = hasher(ZCASH_TZE_INPUT_HASH_PERSONALIZATION);
+    let mut ch = hasher(CRYPTICCOIN_TZE_INPUT_HASH_PERSONALIZATION);
     let tzein = &bundle.vin[input.index()];
     tzein.prevout.write(&mut ch).unwrap();
     CompactSize::write(

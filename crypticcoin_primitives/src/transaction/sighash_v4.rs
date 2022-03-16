@@ -16,12 +16,12 @@ use super::{
 };
 
 const CRYPTICCOIN_SIGHASH_PERSONALIZATION_PREFIX: &[u8; 12] = b"ZcashSigHash";
-const ZCASH_PREVOUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZcashPrevoutHash";
-const ZCASH_SEQUENCE_HASH_PERSONALIZATION: &[u8; 16] = b"ZcashSequencHash";
-const ZCASH_OUTPUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZcashOutputsHash";
-const ZCASH_JOINSPLITS_HASH_PERSONALIZATION: &[u8; 16] = b"ZcashJSplitsHash";
-const ZCASH_SHIELDED_SPENDS_HASH_PERSONALIZATION: &[u8; 16] = b"ZcashSSpendsHash";
-const ZCASH_SHIELDED_OUTPUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZcashSOutputHash";
+const CRYPTICCOIN_PREVOUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZcashPrevoutHash";
+const CRYPTICCOIN_SEQUENCE_HASH_PERSONALIZATION: &[u8; 16] = b"ZcashSequencHash";
+const CRYPTICCOIN_OUTPUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZcashOutputsHash";
+const CRYPTICCOIN_JOINSPLITS_HASH_PERSONALIZATION: &[u8; 16] = b"ZcashJSplitsHash";
+const CRYPTICCOIN_SHIELDED_SPENDS_HASH_PERSONALIZATION: &[u8; 16] = b"ZcashSSpendsHash";
+const CRYPTICCOIN_SHIELDED_OUTPUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZcashSOutputHash";
 
 macro_rules! update_u32 {
     ($h:expr, $value:expr, $tmp:expr) => {
@@ -47,7 +47,7 @@ fn prevout_hash<TA: transparent::Authorization>(vin: &[TxIn<TA>]) -> Blake2bHash
     }
     Blake2bParams::new()
         .hash_length(32)
-        .personal(ZCASH_PREVOUTS_HASH_PERSONALIZATION)
+        .personal(CRYPTICCOIN_PREVOUTS_HASH_PERSONALIZATION)
         .hash(&data)
 }
 
@@ -60,7 +60,7 @@ fn sequence_hash<TA: transparent::Authorization>(vin: &[TxIn<TA>]) -> Blake2bHas
     }
     Blake2bParams::new()
         .hash_length(32)
-        .personal(ZCASH_SEQUENCE_HASH_PERSONALIZATION)
+        .personal(CRYPTICCOIN_SEQUENCE_HASH_PERSONALIZATION)
         .hash(&data)
 }
 
@@ -71,7 +71,7 @@ fn outputs_hash(vout: &[TxOut]) -> Blake2bHash {
     }
     Blake2bParams::new()
         .hash_length(32)
-        .personal(ZCASH_OUTPUTS_HASH_PERSONALIZATION)
+        .personal(CRYPTICCOIN_OUTPUTS_HASH_PERSONALIZATION)
         .hash(&data)
 }
 
@@ -80,7 +80,7 @@ fn single_output_hash(tx_out: &TxOut) -> Blake2bHash {
     tx_out.write(&mut data).unwrap();
     Blake2bParams::new()
         .hash_length(32)
-        .personal(ZCASH_OUTPUTS_HASH_PERSONALIZATION)
+        .personal(CRYPTICCOIN_OUTPUTS_HASH_PERSONALIZATION)
         .hash(&data)
 }
 
@@ -103,7 +103,7 @@ fn joinsplits_hash(
     data.extend_from_slice(joinsplit_pubkey);
     Blake2bParams::new()
         .hash_length(32)
-        .personal(ZCASH_JOINSPLITS_HASH_PERSONALIZATION)
+        .personal(CRYPTICCOIN_JOINSPLITS_HASH_PERSONALIZATION)
         .hash(&data)
 }
 
@@ -120,7 +120,7 @@ fn shielded_spends_hash<A: sapling::Authorization<Proof = GrothProofBytes>>(
     }
     Blake2bParams::new()
         .hash_length(32)
-        .personal(ZCASH_SHIELDED_SPENDS_HASH_PERSONALIZATION)
+        .personal(CRYPTICCOIN_SHIELDED_SPENDS_HASH_PERSONALIZATION)
         .hash(&data)
 }
 
@@ -131,7 +131,7 @@ fn shielded_outputs_hash(shielded_outputs: &[OutputDescription<GrothProofBytes>]
     }
     Blake2bParams::new()
         .hash_length(32)
-        .personal(ZCASH_SHIELDED_OUTPUTS_HASH_PERSONALIZATION)
+        .personal(CRYPTICCOIN_SHIELDED_OUTPUTS_HASH_PERSONALIZATION)
         .hash(&data)
 }
 
@@ -145,7 +145,7 @@ pub fn v4_signature_hash<
 ) -> Blake2bHash {
     if tx.version.has_overwinter() {
         let mut personal = [0; 16];
-        (&mut personal[..12]).copy_from_slice(ZCASH_SIGHASH_PERSONALIZATION_PREFIX);
+        (&mut personal[..12]).copy_from_slice(CRYPTICCOIN_SIGHASH_PERSONALIZATION_PREFIX);
         (&mut personal[12..])
             .write_u32::<LittleEndian>(tx.consensus_branch_id.into())
             .unwrap();

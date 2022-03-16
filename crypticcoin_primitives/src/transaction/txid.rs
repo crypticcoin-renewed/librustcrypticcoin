@@ -26,54 +26,54 @@ use super::{
 };
 
 /// TxId tree root personalization
-const ZCASH_TX_PERSONALIZATION_PREFIX: &[u8; 12] = b"ZcashTxHash_";
+const CRYPTICCOIN_TX_PERSONALIZATION_PREFIX: &[u8; 12] = b"ZcashTxHash_";
 
 // TxId level 1 node personalization
-const ZCASH_HEADERS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdHeadersHash";
-const ZCASH_TRANSPARENT_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdTranspaHash";
-const ZCASH_SAPLING_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSaplingHash";
+const CRYPTICCOIN_HEADERS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdHeadersHash";
+const CRYPTICCOIN_TRANSPARENT_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdTranspaHash";
+const CRYPTICCOIN_SAPLING_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSaplingHash";
 #[cfg(feature = "zfuture")]
-const ZCASH_TZE_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdTZE____Hash";
+const CRYPTICCOIN_TZE_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdTZE____Hash";
 
 // TxId transparent level 2 node personalization
-const ZCASH_PREVOUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdPrevoutHash";
-const ZCASH_SEQUENCE_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSequencHash";
-const ZCASH_OUTPUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdOutputsHash";
+const CRYPTICCOIN_PREVOUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdPrevoutHash";
+const CRYPTICCOIN_SEQUENCE_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSequencHash";
+const CRYPTICCOIN_OUTPUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdOutputsHash";
 
 // TxId tze level 2 node personalization
 #[cfg(feature = "zfuture")]
-const ZCASH_TZE_INPUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdTZEIns_Hash";
+const CRYPTICCOIN_TZE_INPUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdTZEIns_Hash";
 #[cfg(feature = "zfuture")]
-const ZCASH_TZE_OUTPUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdTZEOutsHash";
+const CRYPTICCOIN_TZE_OUTPUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdTZEOutsHash";
 
 // TxId sapling level 2 node personalization
-const ZCASH_SAPLING_SPENDS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSSpendsHash";
-const ZCASH_SAPLING_SPENDS_COMPACT_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSSpendCHash";
-const ZCASH_SAPLING_SPENDS_NONCOMPACT_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSSpendNHash";
+const CRYPTICCOIN_SAPLING_SPENDS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSSpendsHash";
+const CRYPTICCOIN_SAPLING_SPENDS_COMPACT_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSSpendCHash";
+const CRYPTICCOIN_SAPLING_SPENDS_NONCOMPACT_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSSpendNHash";
 
-const ZCASH_SAPLING_OUTPUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSOutputHash";
-const ZCASH_SAPLING_OUTPUTS_COMPACT_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSOutC__Hash";
-const ZCASH_SAPLING_OUTPUTS_MEMOS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSOutM__Hash";
-const ZCASH_SAPLING_OUTPUTS_NONCOMPACT_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSOutN__Hash";
+const CRYPTICCOIN_SAPLING_OUTPUTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSOutputHash";
+const CRYPTICCOIN_SAPLING_OUTPUTS_COMPACT_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSOutC__Hash";
+const CRYPTICCOIN_SAPLING_OUTPUTS_MEMOS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSOutM__Hash";
+const CRYPTICCOIN_SAPLING_OUTPUTS_NONCOMPACT_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxIdSOutN__Hash";
 
-const ZCASH_AUTH_PERSONALIZATION_PREFIX: &[u8; 12] = b"ZTxAuthHash_";
-const ZCASH_TRANSPARENT_SCRIPTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxAuthTransHash";
-const ZCASH_SAPLING_SIGS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxAuthSapliHash";
+const CRYPTICCOIN_AUTH_PERSONALIZATION_PREFIX: &[u8; 12] = b"ZTxAuthHash_";
+const CRYPTICCOIN_TRANSPARENT_SCRIPTS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxAuthTransHash";
+const CRYPTICCOIN_SAPLING_SIGS_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxAuthSapliHash";
 #[cfg(feature = "zfuture")]
-const ZCASH_TZE_WITNESSES_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxAuthTZE__Hash";
+const CRYPTICCOIN_TZE_WITNESSES_HASH_PERSONALIZATION: &[u8; 16] = b"ZTxAuthTZE__Hash";
 
 fn hasher(personal: &[u8; 16]) -> State {
     Params::new().hash_length(32).personal(personal).to_state()
 }
 
 /// Sequentially append the serialized value of each transparent input
-/// to a hash personalized by ZCASH_PREVOUTS_HASH_PERSONALIZATION.
+/// to a hash personalized by CRYPTICCOIN_PREVOUTS_HASH_PERSONALIZATION.
 /// In the case that no inputs are provided, this produces a default
 /// hash from just the personalization string.
 pub(crate) fn transparent_prevout_hash<TransparentAuth: transparent::Authorization>(
     vin: &[TxIn<TransparentAuth>],
 ) -> Blake2bHash {
-    let mut h = hasher(ZCASH_PREVOUTS_HASH_PERSONALIZATION);
+    let mut h = hasher(CRYPTICCOIN_PREVOUTS_HASH_PERSONALIZATION);
     for t_in in vin {
         t_in.prevout.write(&mut h).unwrap();
     }
@@ -85,7 +85,7 @@ pub(crate) fn transparent_prevout_hash<TransparentAuth: transparent::Authorizati
 pub(crate) fn transparent_sequence_hash<TransparentAuth: transparent::Authorization>(
     vin: &[TxIn<TransparentAuth>],
 ) -> Blake2bHash {
-    let mut h = hasher(ZCASH_SEQUENCE_HASH_PERSONALIZATION);
+    let mut h = hasher(CRYPTICCOIN_SEQUENCE_HASH_PERSONALIZATION);
     for t_in in vin {
         (&mut h).write_u32::<LittleEndian>(t_in.sequence).unwrap();
     }
@@ -93,11 +93,11 @@ pub(crate) fn transparent_sequence_hash<TransparentAuth: transparent::Authorizat
 }
 
 /// Sequentially append the full serialized value of each transparent output
-/// to a hash personalized by ZCASH_OUTPUTS_HASH_PERSONALIZATION.
+/// to a hash personalized by CRYPTICCOIN_OUTPUTS_HASH_PERSONALIZATION.
 /// In the case that no outputs are provided, this produces a default
 /// hash from just the personalization string.
 pub(crate) fn transparent_outputs_hash<T: Borrow<TxOut>>(vout: &[T]) -> Blake2bHash {
-    let mut h = hasher(ZCASH_OUTPUTS_HASH_PERSONALIZATION);
+    let mut h = hasher(CRYPTICCOIN_OUTPUTS_HASH_PERSONALIZATION);
     for t_out in vout {
         t_out.borrow().write(&mut h).unwrap();
     }
@@ -105,12 +105,12 @@ pub(crate) fn transparent_outputs_hash<T: Borrow<TxOut>>(vout: &[T]) -> Blake2bH
 }
 
 /// Sequentially append the serialized value of each TZE input, excluding
-/// witness data, to a hash personalized by ZCASH_TZE_INPUTS_HASH_PERSONALIZATION.
+/// witness data, to a hash personalized by CRYPTICCOIN_TZE_INPUTS_HASH_PERSONALIZATION.
 /// In the case that no inputs are provided, this produces a default
 /// hash from just the personalization string.
 #[cfg(feature = "zfuture")]
 pub(crate) fn hash_tze_inputs<A>(tze_inputs: &[TzeIn<A>]) -> Blake2bHash {
-    let mut h = hasher(ZCASH_TZE_INPUTS_HASH_PERSONALIZATION);
+    let mut h = hasher(CRYPTICCOIN_TZE_INPUTS_HASH_PERSONALIZATION);
     for tzein in tze_inputs {
         tzein.write_without_witness(&mut h).unwrap();
     }
@@ -118,12 +118,12 @@ pub(crate) fn hash_tze_inputs<A>(tze_inputs: &[TzeIn<A>]) -> Blake2bHash {
 }
 
 /// Sequentially append the full serialized value of each TZE output
-/// to a hash personalized by ZCASH_TZE_OUTPUTS_HASH_PERSONALIZATION.
+/// to a hash personalized by CRYPTICCOIN_TZE_OUTPUTS_HASH_PERSONALIZATION.
 /// In the case that no outputs are provided, this produces a default
 /// hash from just the personalization string.
 #[cfg(feature = "zfuture")]
 pub(crate) fn hash_tze_outputs(tze_outputs: &[TzeOut]) -> Blake2bHash {
-    let mut h = hasher(ZCASH_TZE_OUTPUTS_HASH_PERSONALIZATION);
+    let mut h = hasher(CRYPTICCOIN_TZE_OUTPUTS_HASH_PERSONALIZATION);
     for tzeout in tze_outputs {
         tzeout.write(&mut h).unwrap();
     }
@@ -131,17 +131,17 @@ pub(crate) fn hash_tze_outputs(tze_outputs: &[TzeOut]) -> Blake2bHash {
 }
 
 /// Write disjoint parts of each Sapling shielded spend to a pair of hashes:
-/// * \[nullifier*\] - personalized with ZCASH_SAPLING_SPENDS_COMPACT_HASH_PERSONALIZATION
-/// * \[(cv, anchor, rk, zkproof)*\] - personalized with ZCASH_SAPLING_SPENDS_NONCOMPACT_HASH_PERSONALIZATION
+/// * \[nullifier*\] - personalized with CRYPTICCOIN_SAPLING_SPENDS_COMPACT_HASH_PERSONALIZATION
+/// * \[(cv, anchor, rk, zkproof)*\] - personalized with CRYPTICCOIN_SAPLING_SPENDS_NONCOMPACT_HASH_PERSONALIZATION
 ///
-/// Then, hash these together personalized by ZCASH_SAPLING_SPENDS_HASH_PERSONALIZATION
+/// Then, hash these together personalized by CRYPTICCOIN_SAPLING_SPENDS_HASH_PERSONALIZATION
 pub(crate) fn hash_sapling_spends<A: sapling::Authorization>(
     shielded_spends: &[SpendDescription<A>],
 ) -> Blake2bHash {
-    let mut h = hasher(ZCASH_SAPLING_SPENDS_HASH_PERSONALIZATION);
+    let mut h = hasher(CRYPTICCOIN_SAPLING_SPENDS_HASH_PERSONALIZATION);
     if !shielded_spends.is_empty() {
-        let mut ch = hasher(ZCASH_SAPLING_SPENDS_COMPACT_HASH_PERSONALIZATION);
-        let mut nh = hasher(ZCASH_SAPLING_SPENDS_NONCOMPACT_HASH_PERSONALIZATION);
+        let mut ch = hasher(CRYPTICCOIN_SAPLING_SPENDS_COMPACT_HASH_PERSONALIZATION);
+        let mut nh = hasher(CRYPTICCOIN_SAPLING_SPENDS_NONCOMPACT_HASH_PERSONALIZATION);
         for s_spend in shielded_spends {
             // we build the hash of nullifiers separately for compact blocks.
             ch.write_all(&s_spend.nullifier.as_ref()).unwrap();
@@ -160,17 +160,17 @@ pub(crate) fn hash_sapling_spends<A: sapling::Authorization>(
 }
 
 /// Write disjoint parts of each Sapling shielded output as 3 separate hashes:
-/// * \[(cmu, epk, enc_ciphertext\[..52\])*\] personalized with ZCASH_SAPLING_OUTPUTS_COMPACT_HASH_PERSONALIZATION
-/// * \[enc_ciphertext\[52..564\]*\] (memo ciphertexts) personalized with ZCASH_SAPLING_OUTPUTS_MEMOS_HASH_PERSONALIZATION
-/// * \[(cv, enc_ciphertext\[564..\], out_ciphertext, zkproof)*\] personalized with ZCASH_SAPLING_OUTPUTS_NONCOMPACT_HASH_PERSONALIZATION
+/// * \[(cmu, epk, enc_ciphertext\[..52\])*\] personalized with CRYPTICCOIN_SAPLING_OUTPUTS_COMPACT_HASH_PERSONALIZATION
+/// * \[enc_ciphertext\[52..564\]*\] (memo ciphertexts) personalized with CRYPTICCOIN_SAPLING_OUTPUTS_MEMOS_HASH_PERSONALIZATION
+/// * \[(cv, enc_ciphertext\[564..\], out_ciphertext, zkproof)*\] personalized with CRYPTICCOIN_SAPLING_OUTPUTS_NONCOMPACT_HASH_PERSONALIZATION
 ///
-/// Then, hash these together personalized with ZCASH_SAPLING_OUTPUTS_HASH_PERSONALIZATION
+/// Then, hash these together personalized with CRYPTICCOIN_SAPLING_OUTPUTS_HASH_PERSONALIZATION
 pub(crate) fn hash_sapling_outputs<A>(shielded_outputs: &[OutputDescription<A>]) -> Blake2bHash {
-    let mut h = hasher(ZCASH_SAPLING_OUTPUTS_HASH_PERSONALIZATION);
+    let mut h = hasher(CRYPTICCOIN_SAPLING_OUTPUTS_HASH_PERSONALIZATION);
     if !shielded_outputs.is_empty() {
-        let mut ch = hasher(ZCASH_SAPLING_OUTPUTS_COMPACT_HASH_PERSONALIZATION);
-        let mut mh = hasher(ZCASH_SAPLING_OUTPUTS_MEMOS_HASH_PERSONALIZATION);
-        let mut nh = hasher(ZCASH_SAPLING_OUTPUTS_NONCOMPACT_HASH_PERSONALIZATION);
+        let mut ch = hasher(CRYPTICCOIN_SAPLING_OUTPUTS_COMPACT_HASH_PERSONALIZATION);
+        let mut mh = hasher(CRYPTICCOIN_SAPLING_OUTPUTS_MEMOS_HASH_PERSONALIZATION);
+        let mut nh = hasher(CRYPTICCOIN_SAPLING_OUTPUTS_NONCOMPACT_HASH_PERSONALIZATION);
         for s_out in shielded_outputs {
             ch.write_all(&s_out.cmu.to_repr().as_ref()).unwrap();
             ch.write_all(s_out.ephemeral_key.as_ref()).unwrap();
@@ -220,7 +220,7 @@ fn hash_header_txid_data(
     lock_time: u32,
     expiry_height: BlockHeight,
 ) -> Blake2bHash {
-    let mut h = hasher(ZCASH_HEADERS_HASH_PERSONALIZATION);
+    let mut h = hasher(CRYPTICCOIN_HEADERS_HASH_PERSONALIZATION);
 
     h.write_u32::<LittleEndian>(version.header()).unwrap();
     h.write_u32::<LittleEndian>(version.version_group_id())
@@ -234,7 +234,7 @@ fn hash_header_txid_data(
 }
 
 fn hash_transparent_txid_data(t_digests: Option<&TransparentDigests<Blake2bHash>>) -> Blake2bHash {
-    let mut h = hasher(ZCASH_TRANSPARENT_HASH_PERSONALIZATION);
+    let mut h = hasher(CRYPTICCOIN_TRANSPARENT_HASH_PERSONALIZATION);
     if let Some(d) = t_digests {
         h.write_all(d.prevout_digest.as_bytes()).unwrap();
         h.write_all(d.sequence_digest.as_bytes()).unwrap();
@@ -247,7 +247,7 @@ fn hash_transparent_txid_data(t_digests: Option<&TransparentDigests<Blake2bHash>
 }
 
 fn hash_sapling_txid_data<A: sapling::Authorization>(bundle: &sapling::Bundle<A>) -> Blake2bHash {
-    let mut h = hasher(ZCASH_SAPLING_HASH_PERSONALIZATION);
+    let mut h = hasher(CRYPTICCOIN_SAPLING_HASH_PERSONALIZATION);
     if !(bundle.shielded_spends.is_empty() && bundle.shielded_outputs.is_empty()) {
         h.write_all(hash_sapling_spends(&bundle.shielded_spends).as_bytes())
             .unwrap();
@@ -262,12 +262,12 @@ fn hash_sapling_txid_data<A: sapling::Authorization>(bundle: &sapling::Bundle<A>
 }
 
 fn hash_sapling_txid_empty() -> Blake2bHash {
-    hasher(ZCASH_SAPLING_HASH_PERSONALIZATION).finalize()
+    hasher(CRYPTICCOIN_SAPLING_HASH_PERSONALIZATION).finalize()
 }
 
 #[cfg(feature = "zfuture")]
 fn hash_tze_txid_data(tze_digests: Option<&TzeDigests<Blake2bHash>>) -> Blake2bHash {
-    let mut h = hasher(ZCASH_TZE_HASH_PERSONALIZATION);
+    let mut h = hasher(CRYPTICCOIN_TZE_HASH_PERSONALIZATION);
     if let Some(d) = tze_digests {
         h.write_all(d.inputs_digest.as_bytes()).unwrap();
         h.write_all(d.outputs_digest.as_bytes()).unwrap();
@@ -361,7 +361,7 @@ pub(crate) fn to_hash(
     #[cfg(feature = "zfuture")] tze_digests: Option<&TzeDigests<Blake2bHash>>,
 ) -> Blake2bHash {
     let mut personal = [0; 16];
-    (&mut personal[..12]).copy_from_slice(ZCASH_TX_PERSONALIZATION_PREFIX);
+    (&mut personal[..12]).copy_from_slice(CRYPTICCOIN_TX_PERSONALIZATION_PREFIX);
     (&mut personal[12..])
         .write_u32::<LittleEndian>(consensus_branch_id.into())
         .unwrap();
@@ -444,7 +444,7 @@ impl TransactionDigest<Authorized> for BlockTxCommitmentDigester {
         &self,
         transparent_bundle: Option<&transparent::Bundle<transparent::Authorized>>,
     ) -> Blake2bHash {
-        let mut h = hasher(ZCASH_TRANSPARENT_SCRIPTS_HASH_PERSONALIZATION);
+        let mut h = hasher(CRYPTICCOIN_TRANSPARENT_SCRIPTS_HASH_PERSONALIZATION);
         if let Some(bundle) = transparent_bundle {
             for txin in &bundle.vin {
                 txin.script_sig.write(&mut h).unwrap();
@@ -457,7 +457,7 @@ impl TransactionDigest<Authorized> for BlockTxCommitmentDigester {
         &self,
         sapling_bundle: Option<&sapling::Bundle<sapling::Authorized>>,
     ) -> Blake2bHash {
-        let mut h = hasher(ZCASH_SAPLING_SIGS_HASH_PERSONALIZATION);
+        let mut h = hasher(CRYPTICCOIN_SAPLING_SIGS_HASH_PERSONALIZATION);
         if let Some(bundle) = sapling_bundle {
             for spend in &bundle.shielded_spends {
                 h.write_all(&spend.zkproof).unwrap();
@@ -487,7 +487,7 @@ impl TransactionDigest<Authorized> for BlockTxCommitmentDigester {
 
     #[cfg(feature = "zfuture")]
     fn digest_tze(&self, tze_bundle: Option<&tze::Bundle<tze::Authorized>>) -> Blake2bHash {
-        let mut h = hasher(ZCASH_TZE_WITNESSES_HASH_PERSONALIZATION);
+        let mut h = hasher(CRYPTICCOIN_TZE_WITNESSES_HASH_PERSONALIZATION);
         if let Some(bundle) = tze_bundle {
             for tzein in &bundle.vin {
                 h.write_all(&tzein.witness.payload.0).unwrap();
@@ -507,7 +507,7 @@ impl TransactionDigest<Authorized> for BlockTxCommitmentDigester {
         let digests = [transparent_digest, sapling_digest, orchard_digest];
 
         let mut personal = [0; 16];
-        (&mut personal[..12]).copy_from_slice(ZCASH_AUTH_PERSONALIZATION_PREFIX);
+        (&mut personal[..12]).copy_from_slice(CRYPTICCOIN_AUTH_PERSONALIZATION_PREFIX);
         (&mut personal[12..])
             .write_u32::<LittleEndian>(consensus_branch_id.into())
             .unwrap();
