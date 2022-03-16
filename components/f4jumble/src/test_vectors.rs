@@ -8,7 +8,7 @@ pub(crate) const MAX_VECTOR_LENGTH: usize = 193;
 #[cfg(feature = "std")]
 pub(crate) const MAX_VECTOR_LENGTH: usize = 16449;
 
-// From https://github.com/zcash-hackworks/zcash-test-vectors/blob/master/f4jumble.py
+// From https://github.com/crypticcoin-hackworks/crypticcoin-test-vectors/blob/master/f4jumble.py
 pub(crate) const TEST_VECTORS: &[TestVector] = &[
     TestVector {
         normal: &[

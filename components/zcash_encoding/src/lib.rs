@@ -1,7 +1,7 @@
-//! *Zcash binary encodings.*
+//! *Crypticcoin binary encodings.*
 //!
-//! `zcash_encoding` is a library that provides common encoding and decoding operations
-//! for stable binary encodings used throughout the Zcash ecosystem.
+//! `crypticcoin_encoding` is a library that provides common encoding and decoding operations
+//! for stable binary encodings used throughout the Crypticcoin ecosystem.
 
 // Catch documentation errors caused by code changes.
 #![deny(broken_intra_doc_links)]
@@ -19,7 +19,7 @@ pub const MAX_COMPACT_SIZE: u32 = 0x02000000;
 /// Namespace for functions for compact encoding of integers.
 ///
 /// This codec requires integers to be in the range `0x0..=0x02000000`, for compatibility
-/// with Zcash consensus rules.
+/// with Crypticcoin consensus rules.
 pub struct CompactSize;
 
 impl CompactSize {
@@ -98,7 +98,7 @@ impl CompactSize {
 /// Namespace for functions that perform encoding of vectors.
 ///
 /// The length of a vector is restricted to at most `0x02000000`, for compatibility with
-/// the Zcash consensus rules.
+/// the Crypticcoin consensus rules.
 pub struct Vector;
 
 impl Vector {

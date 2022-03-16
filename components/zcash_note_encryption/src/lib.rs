@@ -1,15 +1,15 @@
-//! Note encryption for Zcash transactions.
+//! Note encryption for Crypticcoin transactions.
 //!
 //! This crate implements the [in-band secret distribution scheme] for the Sapling and
 //! Orchard protocols. It provides reusable methods that implement common note encryption
 //! and trial decryption logic, and enforce protocol-agnostic verification requirements.
 //!
 //! Protocol-specific logic is handled via the [`Domain`] trait. Implementations of this
-//! trait are provided in the [`zcash_primitives`] (for Sapling) and [`orchard`] crates;
+//! trait are provided in the [`crypticcoin_primitives`] (for Sapling) and [`orchard`] crates;
 //! users with their own existing types can similarly implement the trait themselves.
 //!
 //! [in-band secret distribution scheme]: https://zips.z.cash/protocol/protocol.pdf#saplingandorchardinband
-//! [`zcash_primitives`]: https://crates.io/crates/zcash_primitives
+//! [`crypticcoin_primitives`]: https://crates.io/crates/crypticcoin_primitives
 //! [`orchard`]: https://crates.io/crates/orchard
 
 #![no_std]
@@ -176,10 +176,10 @@ pub trait Domain {
     ///
     /// The `recipient` argument is present as a secondary way to obtain the diversifier;
     /// this is due to a historical quirk of how the Sapling `Note` struct was implemented
-    /// in the `zcash_primitives` crate. `recipient` will be removed from this method in a
-    /// future crate release, once [`zcash_primitives` has been refactored].
+    /// in the `crypticcoin_primitives` crate. `recipient` will be removed from this method in a
+    /// future crate release, once [`crypticcoin_primitives` has been refactored].
     ///
-    /// [`zcash_primitives` has been refactored]: https://github.com/zcash/librustzcash/issues/454
+    /// [`crypticcoin_primitives` has been refactored]: https://github.com/crypticcoin-renewed/librustcrypticcoin/issues/454
     fn note_plaintext_bytes(
         note: &Self::Note,
         recipient: &Self::Recipient,
@@ -339,7 +339,7 @@ pub trait ShieldedOutput<D: Domain, const CIPHERTEXT_SIZE: usize> {
 /// consistent with each other.
 ///
 /// Implements section 4.19 of the
-/// [Zcash Protocol Specification](https://zips.z.cash/protocol/nu5.pdf#saplingandorchardinband)
+/// [Crypticcoin Protocol Specification](https://zips.z.cash/protocol/nu5.pdf#saplingandorchardinband)
 /// NB: the example code is only covering the post-Canopy case.
 ///
 /// # Examples
@@ -347,11 +347,11 @@ pub trait ShieldedOutput<D: Domain, const CIPHERTEXT_SIZE: usize> {
 /// ```
 /// extern crate ff;
 /// extern crate rand_core;
-/// extern crate zcash_primitives;
+/// extern crate crypticcoin_primitives;
 ///
 /// use ff::Field;
 /// use rand_core::OsRng;
-/// use zcash_primitives::{
+/// use crypticcoin_primitives::{
 ///     keys::{OutgoingViewingKey, prf_expand},
 ///     consensus::{TEST_NETWORK, TestNetwork, NetworkUpgrade, Parameters},
 ///     memo::MemoBytes,

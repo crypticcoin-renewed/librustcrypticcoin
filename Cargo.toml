@@ -2,15 +2,15 @@
 members = [
     "components/equihash",
     "components/f4jumble",
-    "components/zcash_address",
-    "components/zcash_encoding",
-    "components/zcash_note_encryption",
-    "zcash_client_backend",
-    "zcash_client_sqlite",
-    "zcash_extensions",
-    "zcash_history",
-    "zcash_primitives",
-    "zcash_proofs",
+    "components/crypticcoin_address",
+    "components/crypticcoin_encoding",
+    "components/crypticcoin_note_encryption",
+    "crypticcoin_client_backend",
+    "crypticcoin_client_sqlite",
+    "crypticcoin_extensions",
+    "crypticcoin_history",
+    "crypticcoin_primitives",
+    "crypticcoin_proofs",
 ]
 
 [profile.release]
@@ -19,6 +19,6 @@ panic = 'abort'
 codegen-units = 1
 
 [patch.crates-io]
-zcash_encoding = { path = "components/zcash_encoding" }
-zcash_note_encryption = { path = "components/zcash_note_encryption" }
+crypticcoin_encoding = { path = "components/crypticcoin_encoding" }
+crypticcoin_note_encryption = { path = "components/crypticcoin_note_encryption" }
 hdwallet = { git = "https://github.com/nuttycom/hdwallet", rev = "576683b9f2865f1118c309017ff36e01f84420c9" }

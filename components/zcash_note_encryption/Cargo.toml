@@ -1,13 +1,13 @@
 [package]
-name = "zcash_note_encryption"
-description = "Note encryption for Zcash transactions"
+name = "crypticcoin_note_encryption"
+description = "Note encryption for Crypticcoin transactions"
 version = "0.1.0"
 authors = [
     "Jack Grigg <jack@electriccoin.co>",
     "Kris Nuttycombe <kris@electriccoin.co>"
 ]
-homepage = "https://github.com/zcash/librustzcash"
-repository = "https://github.com/zcash/librustzcash"
+homepage = "https://github.com/crypticcoin-renewed/librustcrypticcoin"
+repository = "https://github.com/crypticcoin-renewed/librustcrypticcoin"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
 edition = "2018"
@@ -25,7 +25,7 @@ subtle = { version = "2.2.3", default-features = false }
 
 [dev-dependencies]
 ff = { version = "0.11", default-features = false }
-zcash_primitives = { version = "0.5", path = "../../zcash_primitives" }
+crypticcoin_primitives = { version = "0.5", path = "../../crypticcoin_primitives" }
 jubjub = "0.8"
 
 [features]

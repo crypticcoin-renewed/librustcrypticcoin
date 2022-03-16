@@ -1,0 +1,25 @@
+[package]
+name = "crypticcoin_extensions"
+description = "Zcash Extension implementations & consensus node integration layer."
+version = "0.0.0"
+authors = ["Jack Grigg <jack@z.cash>", "Kris Nuttycombe <kris@z.cash>"]
+homepage = "https://github.com/crypticcoin-renewed/librustcrypticcoin"
+repository = "https://github.com/crypticcoin-renewed/librustcrypticcoin"
+license = "MIT OR Apache-2.0"
+edition = "2018"
+
+[dependencies]
+blake2b_simd = "1"
+crypticcoin_primitives = { version = "0.5", path = "../crypticcoin_primitives", features = ["zfuture" ] }
+
+[dev-dependencies]
+ff = "0.11"
+jubjub = "0.8"
+rand_core = "0.6"
+crypticcoin_proofs = { version = "0.5", path = "../crypticcoin_proofs" }
+
+[features]
+transparent-inputs = []
+
+[lib]
+bench = false

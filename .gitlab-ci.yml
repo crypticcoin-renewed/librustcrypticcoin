@@ -3,7 +3,7 @@
  #  File: .gitlab-ci.yml
  #  Author: mdr0id
  #  Date: 9/10/2018
- #  Description:  Used to setup runners/jobs for librustzcash
+ #  Description:  Used to setup runners/jobs for librustcrypticcoin
  #  Usage: Commit source and the pipeline will trigger the according jobs.
  #         For now the build and test are done in the same jobs.
  #
@@ -31,14 +31,14 @@ rust-nightly:
     - cargo build --verbose
   allow_failure: true
 
-librustzcash-test-latest:
+librustcrypticcoin-test-latest:
   stage: test
   image: rust:latest
   script:
     - cargo --verbose --version
     - time cargo test --release --verbose
 
-librustzcash-test-rust-nightly:
+librustcrypticcoin-test-rust-nightly:
   stage: test
   image: rustlang/rust:nightly
   script:
@@ -47,7 +47,7 @@ librustzcash-test-rust-nightly:
   allow_failure: true
 
 #used to manually deploy a given release
-librustzcash-rust-rc:
+librustcrypticcoin-rust-rc:
   stage: deploy
   image: rust:latest
   script:
@@ -56,7 +56,7 @@ librustzcash-rust-rc:
   when: manual
 
 #used to manually deploy a given release
-librustzcash-rust-nightly-rc:
+librustcrypticcoin-rust-nightly-rc:
   stage: deploy
   image: rustlang/rust:nightly
   script:

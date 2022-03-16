@@ -97,7 +97,7 @@ pub(crate) mod test_vectors;
 #[cfg(test)]
 mod tests {
     use assert_matches::assert_matches;
-    use zcash_encoding::MAX_COMPACT_SIZE;
+    use crypticcoin_encoding::MAX_COMPACT_SIZE;
 
     use crate::{
         kind::unified::{private::SealedContainer, Container, Encoding},

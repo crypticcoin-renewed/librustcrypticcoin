@@ -96,7 +96,7 @@ impl Typecode {
     }
 }
 
-/// An error while attempting to parse a string as a Zcash address.
+/// An error while attempting to parse a string as a Crypticcoin address.
 #[derive(Debug, PartialEq)]
 pub enum ParseError {
     /// The unified container contains both P2PKH and P2SH items.
@@ -144,7 +144,7 @@ pub(crate) mod private {
         convert::{TryFrom, TryInto},
         io::Write,
     };
-    use zcash_encoding::CompactSize;
+    use crypticcoin_encoding::CompactSize;
 
     /// A raw address or viewing key.
     pub trait SealedItem: for<'a> TryFrom<(u32, &'a [u8]), Error = ParseError> + Clone {

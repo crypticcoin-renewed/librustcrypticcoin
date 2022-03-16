@@ -9,28 +9,28 @@ pub use convert::{FromAddress, ToAddress, UnsupportedAddress};
 pub use encoding::ParseError;
 pub use kind::unified;
 
-/// A Zcash address.
+/// A Crypticcoin address.
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
-pub struct ZcashAddress {
+pub struct CrypticcoinAddress {
     net: Network,
     kind: AddressKind,
 }
 
-/// The Zcash network for which an address is encoded.
+/// The Crypticcoin network for which an address is encoded.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum Network {
-    /// Zcash Mainnet.
+    /// Crypticcoin Mainnet.
     Main,
-    /// Zcash Testnet.
+    /// Crypticcoin Testnet.
     Test,
-    /// Private integration / regression testing, used in `zcashd`.
+    /// Private integration / regression testing, used in `crypticcoind`.
     ///
     /// For some address types there is no distinction between test and regtest encodings;
     /// those will always be parsed as `Network::Test`.
     Regtest,
 }
 
-/// Known kinds of Zcash addresses.
+/// Known kinds of Crypticcoin addresses.
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 enum AddressKind {
     Sprout(kind::sprout::Data),
@@ -40,29 +40,29 @@ enum AddressKind {
     P2sh(kind::p2sh::Data),
 }
 
-impl ZcashAddress {
-    /// Attempts to parse the given string as a Zcash address.
+impl CrypticcoinAddress {
+    /// Attempts to parse the given string as a Crypticcoin address.
     ///
     /// This simply calls [`s.parse()`], leveraging the [`FromStr` implementation].
     ///
     /// [`s.parse()`]: std::primitive::str::parse
-    /// [`FromStr` implementation]: ZcashAddress#impl-FromStr
+    /// [`FromStr` implementation]: CrypticcoinAddress#impl-FromStr
     ///
     /// # Errors
     ///
     /// - If the parser can detect that the string _must_ contain an address encoding used
-    ///   by Zcash, [`ParseError::InvalidEncoding`] will be returned if any subsequent
+    ///   by Crypticcoin, [`ParseError::InvalidEncoding`] will be returned if any subsequent
     ///   part of that encoding is invalid.
     ///
-    /// - In all other cases, [`ParseError::NotZcash`] will be returned on failure.
+    /// - In all other cases, [`ParseError::NotCrypticcoin`] will be returned on failure.
     ///
     /// # Examples
     ///
     /// ```
-    /// use zcash_address::ZcashAddress;
+    /// use crypticcoin_address::CrypticcoinAddress;
     ///
     /// let encoded = "zs1z7rejlpsa98s2rrrfkwmaxu53e4ue0ulcrw0h4x5g8jl04tak0d3mm47vdtahatqrlkngh9sly";
-    /// let addr = ZcashAddress::try_from_encoded(&encoded);
+    /// let addr = CrypticcoinAddress::try_from_encoded(&encoded);
     /// assert_eq!(encoded.parse(), addr);
     /// ```
     pub fn try_from_encoded(s: &str) -> Result<Self, ParseError> {
@@ -72,8 +72,8 @@ impl ZcashAddress {
     /// Converts this address into another type.
     ///
     /// `convert` can convert into any type that implements the [`FromAddress`] trait.
-    /// This enables `ZcashAddress` to be used as a common parsing and serialization
-    /// interface for Zcash addresses, while delegating operations on those addresses
+    /// This enables `CrypticcoinAddress` to be used as a common parsing and serialization
+    /// interface for Crypticcoin addresses, while delegating operations on those addresses
     /// (such as constructing transactions) to downstream crates.
     ///
     /// If you want to get the encoded string for this address, use the [`Display`]

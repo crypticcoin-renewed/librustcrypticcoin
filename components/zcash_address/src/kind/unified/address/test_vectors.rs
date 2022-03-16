@@ -6,7 +6,7 @@ pub(crate) struct TestVector {
     pub(crate) unified_addr: &'static [u8],
 }
 
-// From https://github.com/zcash-hackworks/zcash-test-vectors/blob/master/unified_address.py
+// From https://github.com/crypticcoin-hackworks/crypticcoin-test-vectors/blob/master/unified_address.py
 pub(crate) const TEST_VECTORS: &[TestVector] = &[
     TestVector {
         p2pkh_bytes: None,

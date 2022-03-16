@@ -3,7 +3,7 @@ pub(crate) struct TestVector {
     pub(crate) jumbled_hash: &'static [u8],
 }
 
-// From https://github.com/zcash-hackworks/zcash-test-vectors/blob/master/f4jumble_long.py
+// From https://github.com/crypticcoin-hackworks/crypticcoin-test-vectors/blob/master/f4jumble_long.py
 pub(crate) const TEST_VECTORS: &[TestVector] = &[
     TestVector {
         length: 3246395,

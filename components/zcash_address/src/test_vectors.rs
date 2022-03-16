@@ -5,7 +5,7 @@ use crate::{
         self,
         address::{test_vectors::TEST_VECTORS, Receiver},
     },
-    Network, ToAddress, ZcashAddress,
+    Network, ToAddress, CrypticcoinAddress,
 };
 
 #[test]
@@ -26,10 +26,10 @@ fn unified() {
             .chain(tv.orchard_raw_addr.map(Receiver::Orchard))
             .collect();
 
-        let expected_addr = ZcashAddress::from_unified(Network::Main, unified::Address(receivers));
+        let expected_addr = CrypticcoinAddress::from_unified(Network::Main, unified::Address(receivers));
 
         // Test parsing
-        let addr: ZcashAddress = addr_string.parse().unwrap();
+        let addr: CrypticcoinAddress = addr_string.parse().unwrap();
         assert_eq!(addr, expected_addr);
 
         // Test serialization

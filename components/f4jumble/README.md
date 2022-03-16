@@ -3,7 +3,7 @@
 An implementation of the F4Jumble algorithm, an unkeyed variable-width
 permutation.
 
-F4Jumble is used by Zcash Unified Addresses and Unified Viewing Keys to
+F4Jumble is used by Crypticcoin Unified Addresses and Unified Viewing Keys to
 prevent certain kinds of malleation attacks, and is specified by [ZIP 316](https://zips.z.cash/zip316).
 
 ## License

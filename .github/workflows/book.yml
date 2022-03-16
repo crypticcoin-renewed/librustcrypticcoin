@@ -1,4 +1,4 @@
-name: librustzcash documentation
+name: librustcrypticcoin documentation
 
 on:
   push:

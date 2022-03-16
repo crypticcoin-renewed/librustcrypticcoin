@@ -1,6 +1,6 @@
 use std::{error::Error, fmt};
 
-use crate::{kind::*, AddressKind, Network, ZcashAddress};
+use crate::{kind::*, AddressKind, Network, CrypticcoinAddress};
 
 /// An address type is not supported for conversion.
 #[derive(Debug)]
@@ -8,20 +8,20 @@ pub struct UnsupportedAddress(&'static str);
 
 impl fmt::Display for UnsupportedAddress {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "Zcash {} addresses are not supported", self.0)
+        write!(f, "Crypticcoin {} addresses are not supported", self.0)
     }
 }
 
 impl Error for UnsupportedAddress {}
 
-/// A helper trait for converting a [`ZcashAddress`] into another type.
+/// A helper trait for converting a [`CrypticcoinAddress`] into another type.
 ///
-/// [`ZcashAddress`]: crate::ZcashAddress
+/// [`CrypticcoinAddress`]: crate::CrypticcoinAddress
 ///
 /// # Examples
 ///
 /// ```
-/// use zcash_address::{FromAddress, Network, UnsupportedAddress, ZcashAddress};
+/// use crypticcoin_address::{FromAddress, Network, UnsupportedAddress, CrypticcoinAddress};
 ///
 /// #[derive(Debug)]
 /// struct MySapling([u8; 43]);
@@ -35,17 +35,17 @@ impl Error for UnsupportedAddress {}
 /// }
 ///
 /// // For a supported address type, the conversion works.
-/// let addr: ZcashAddress =
+/// let addr: CrypticcoinAddress =
 ///     "zs1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqpq6d8g"
 ///         .parse()
 ///         .unwrap();
 /// assert!(addr.convert::<MySapling>().is_ok());
 ///
 /// // For an unsupported address type, we get an error.
-/// let addr: ZcashAddress = "t1Hsc1LR8yKnbbe3twRp88p6vFfC5t7DLbs".parse().unwrap();
+/// let addr: CrypticcoinAddress = "t1Hsc1LR8yKnbbe3twRp88p6vFfC5t7DLbs".parse().unwrap();
 /// assert_eq!(
 ///     addr.convert::<MySapling>().unwrap_err().to_string(),
-///     "Zcash transparent P2PKH addresses are not supported",
+///     "Crypticcoin transparent P2PKH addresses are not supported",
 /// );
 /// ```
 pub trait FromAddress: Sized {
@@ -75,27 +75,27 @@ pub trait FromAddress: Sized {
     }
 }
 
-/// A helper trait for converting another type into a [`ZcashAddress`].
+/// A helper trait for converting another type into a [`CrypticcoinAddress`].
 ///
 /// This trait is sealed and cannot be implemented for types outside this crate. Its
-/// purpose is to move these conversion functions out of the main `ZcashAddress` API
+/// purpose is to move these conversion functions out of the main `CrypticcoinAddress` API
 /// documentation, as they are only required when creating addresses (rather than when
 /// parsing addresses, which is a more common occurrence).
 ///
-/// [`ZcashAddress`]: crate::ZcashAddress
+/// [`CrypticcoinAddress`]: crate::CrypticcoinAddress
 ///
 /// # Examples
 ///
 /// ```
-/// use zcash_address::{ToAddress, Network, ZcashAddress};
+/// use crypticcoin_address::{ToAddress, Network, CrypticcoinAddress};
 ///
 /// #[derive(Debug)]
 /// struct MySapling([u8; 43]);
 ///
 /// impl MySapling {
 ///     /// Encodes this Sapling address for the given network.
-///     fn encode(&self, net: Network) -> ZcashAddress {
-///         ZcashAddress::from_sapling(net, self.0)
+///     fn encode(&self, net: Network) -> CrypticcoinAddress {
+///         CrypticcoinAddress::from_sapling(net, self.0)
 ///     }
 /// }
 ///
@@ -118,9 +118,9 @@ pub trait ToAddress: private::Sealed {
     fn from_transparent_p2sh(net: Network, data: p2sh::Data) -> Self;
 }
 
-impl ToAddress for ZcashAddress {
+impl ToAddress for CrypticcoinAddress {
     fn from_sprout(net: Network, data: sprout::Data) -> Self {
-        ZcashAddress {
+        CrypticcoinAddress {
             net: if let Network::Regtest = net {
                 Network::Test
             } else {
@@ -131,21 +131,21 @@ impl ToAddress for ZcashAddress {
     }
 
     fn from_sapling(net: Network, data: sapling::Data) -> Self {
-        ZcashAddress {
+        CrypticcoinAddress {
             net,
             kind: AddressKind::Sapling(data),
         }
     }
 
     fn from_unified(net: Network, data: unified::Address) -> Self {
-        ZcashAddress {
+        CrypticcoinAddress {
             net,
             kind: AddressKind::Unified(data),
         }
     }
 
     fn from_transparent_p2pkh(net: Network, data: p2pkh::Data) -> Self {
-        ZcashAddress {
+        CrypticcoinAddress {
             net: if let Network::Regtest = net {
                 Network::Test
             } else {
@@ -156,7 +156,7 @@ impl ToAddress for ZcashAddress {
     }
 
     fn from_transparent_p2sh(net: Network, data: p2sh::Data) -> Self {
-        ZcashAddress {
+        CrypticcoinAddress {
             net: if let Network::Regtest = net {
                 Network::Test
             } else {
@@ -168,8 +168,8 @@ impl ToAddress for ZcashAddress {
 }
 
 mod private {
-    use crate::ZcashAddress;
+    use crate::CrypticcoinAddress;
 
     pub trait Sealed {}
-    impl Sealed for ZcashAddress {}
+    impl Sealed for CrypticcoinAddress {}
 }

@@ -3,8 +3,8 @@ name = "equihash"
 description = "The Equihash Proof-of-Work function"
 version = "0.1.0"
 authors = ["Jack Grigg <jack@z.cash>"]
-homepage = "https://github.com/zcash/librustzcash"
-repository = "https://github.com/zcash/librustzcash"
+homepage = "https://github.com/crypticcoin-renewed/librustcrypticcoin"
+repository = "https://github.com/crypticcoin-renewed/librustcrypticcoin"
 license = "MIT OR Apache-2.0"
 edition = "2018"
 

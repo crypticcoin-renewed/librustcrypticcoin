@@ -1,7 +1,7 @@
-# zcash_encodings
+# crypticcoin_encodings
 
 This library provides common encoding and decoding operations for stable binary
-encodings used throughout the Zcash ecosystem.
+encodings used throughout the Crypticcoin ecosystem.
 
 ## License
 
