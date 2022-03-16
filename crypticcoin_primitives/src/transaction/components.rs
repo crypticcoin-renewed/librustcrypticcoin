@@ -1,4 +1,4 @@
-//! Structs representing the components within Zcash transactions.
+//! Structs representing the components within Crypticcoin transactions.
 
 pub mod amount;
 pub mod orchard;

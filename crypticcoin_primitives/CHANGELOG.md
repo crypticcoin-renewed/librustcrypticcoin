@@ -27,12 +27,12 @@ and this library adheres to Rust's notion of
   - `orchard` parsing and serialization for Orchard transaction components.
 - `crypticcoin_primitives::transaction::Authorization` a trait representing a type-level
   record of authorization types that correspond to signatures, witnesses, and
-  proofs for each Zcash sub-protocol (transparent, Sprout, Sapling, TZE, and
+  proofs for each Crypticcoin sub-protocol (transparent, Sprout, Sapling, TZE, and
   Orchard). This type makes it possible to encode a type-safe state machine
   for the application of authorizing data to a transaction; implementations of
   this trait represent different states of the authorization process.
 - New bundle types under the `crypticcoin_primitives::transaction` submodules, one for
-  each Zcash sub-protocol. These are now used instead of bare fields
+  each Crypticcoin sub-protocol. These are now used instead of bare fields
   within the `TransactionData` type.
   - `components::sapling::Bundle` bundle of
     Sapling transaction elements. This new struct is parameterized by a

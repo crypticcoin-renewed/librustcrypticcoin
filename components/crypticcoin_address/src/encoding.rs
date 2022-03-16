@@ -286,8 +286,8 @@ mod tests {
             }),
         );
         assert_eq!(
-            "something t1Hsc1LR8yKnbbe3twRp88p6vFfC5t7DLbs".parse::<ZcashAddress>(),
-            Err(ParseError::NotZcash),
+            "something t1Hsc1LR8yKnbbe3twRp88p6vFfC5t7DLbs".parse::<CrypticcoinAddress>(),
+            Err(ParseError::NotCrypticcoin),
         );
     }
 }

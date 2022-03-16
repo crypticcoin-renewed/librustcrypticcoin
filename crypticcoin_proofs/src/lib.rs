@@ -1,6 +1,6 @@
-//! *Zcash circuits and proofs.*
+//! *Crypticcoin circuits and proofs.*
 //!
-//! `crypticcoin_proofs` contains the zk-SNARK circuits used by Zcash, and the APIs for creating
+//! `crypticcoin_proofs` contains the zk-SNARK circuits used by Crypticcoin, and the APIs for creating
 //! and verifying proofs.
 
 #![cfg_attr(docsrs, feature(doc_cfg))]
@@ -47,26 +47,26 @@ const SPROUT_HASH: &str = "e9b238411bd6c0ec4791e9d04245ec350c9c5744f5610dfcce436
 #[cfg(feature = "download-params")]
 const DOWNLOAD_URL: &str = "https://download.z.cash/downloads";
 
-/// Returns the default folder that the Zcash proving parameters are located in.
+/// Returns the default folder that the Crypticcoin proving parameters are located in.
 #[cfg(feature = "directories")]
 #[cfg_attr(docsrs, doc(cfg(feature = "directories")))]
 pub fn default_params_folder() -> Option<PathBuf> {
     BaseDirs::new().map(|base_dirs| {
         if cfg!(any(windows, target_os = "macos")) {
-            base_dirs.data_dir().join("ZcashParams")
+            base_dirs.data_dir().join("CrypticcoinParams")
         } else {
             base_dirs.home_dir().join(".crypticcoin-params")
         }
     })
 }
 
-/// Download the Zcash Sapling parameters, storing them in the default location.
+/// Download the Crypticcoin Sapling parameters, storing them in the default location.
 ///
 /// This mirrors the behaviour of the `fetch-params.sh` script from `crypticcoind`.
 #[cfg(feature = "download-params")]
 #[cfg_attr(docsrs, doc(cfg(feature = "download-params")))]
 pub fn download_parameters() -> Result<(), minreq::Error> {
-    // Ensure that the default Zcash parameters location exists.
+    // Ensure that the default Crypticcoin parameters location exists.
     let params_dir = default_params_folder().ok_or_else(|| {
         io::Error::new(io::ErrorKind::Other, "Could not load default params folder")
     })?;
@@ -112,7 +112,7 @@ pub fn download_parameters() -> Result<(), minreq::Error> {
     Ok(())
 }
 
-pub struct ZcashParameters {
+pub struct CrypticcoinParameters {
     pub spend_params: Parameters<Bls12>,
     pub spend_vk: PreparedVerifyingKey<Bls12>,
     pub output_params: Parameters<Bls12>,
@@ -124,7 +124,7 @@ pub fn load_parameters(
     spend_path: &Path,
     output_path: &Path,
     sprout_path: Option<&Path>,
-) -> ZcashParameters {
+) -> CrypticcoinParameters {
     // Load from each of the paths
     let spend_fs = File::open(spend_path).expect("couldn't load Sapling spend parameters file");
     let output_fs = File::open(output_path).expect("couldn't load Sapling output parameters file");
@@ -145,7 +145,7 @@ pub fn parse_parameters<R: io::Read>(
     spend_fs: R,
     output_fs: R,
     sprout_fs: Option<R>,
-) -> ZcashParameters {
+) -> CrypticcoinParameters {
     let mut spend_fs = hashreader::HashReader::new(spend_fs);
     let mut output_fs = hashreader::HashReader::new(output_fs);
     let mut sprout_fs = sprout_fs.map(hashreader::HashReader::new);
@@ -198,7 +198,7 @@ pub fn parse_parameters<R: io::Read>(
     let output_vk = prepare_verifying_key(&output_params.vk);
     let sprout_vk = sprout_vk.map(|vk| prepare_verifying_key(&vk));
 
-    ZcashParameters {
+    CrypticcoinParameters {
         spend_params,
         spend_vk,
         output_params,

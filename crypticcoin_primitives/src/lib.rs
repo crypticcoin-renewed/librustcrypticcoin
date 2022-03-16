@@ -1,7 +1,7 @@
-//! *General Zcash primitives.*
+//! *General Crypticcoin primitives.*
 //!
 //! `crypticcoin_primitives` is a library that provides the core structs and functions necessary
-//! for working with Zcash.
+//! for working with Crypticcoin.
 
 #![cfg_attr(docsrs, feature(doc_cfg))]
 // Catch documentation errors caused by code changes.

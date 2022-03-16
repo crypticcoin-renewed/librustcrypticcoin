@@ -24,10 +24,10 @@ use crypticcoin_encoding::{CompactSize, Vector};
 #[cfg(feature = "zfuture")]
 use crate::transaction::{components::tze, sighash::TzeInput, TzeDigests};
 
-const ZCASH_TRANSPARENT_INPUT_HASH_PERSONALIZATION: &[u8; 16] = b"Zcash___TxInHash";
+const CRYPTICCOIN_TRANSPARENT_INPUT_HASH_PERSONALIZATION: &[u8; 16] = b"Crypticcoin___TxInHash";
 
 #[cfg(feature = "zfuture")]
-const ZCASH_TZE_INPUT_HASH_PERSONALIZATION: &[u8; 16] = b"Zcash__TzeInHash";
+const CRYPTICCOIN_TZE_INPUT_HASH_PERSONALIZATION: &[u8; 16] = b"Zcash__TzeInHash";
 
 fn hasher(personal: &[u8; 16]) -> State {
     Params::new().hash_length(32).personal(personal).to_state()

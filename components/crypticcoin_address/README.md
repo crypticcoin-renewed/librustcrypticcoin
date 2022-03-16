@@ -1,7 +1,7 @@
 # crypticcoin_address
 
-Zcash address parsing and serialization. This library allows its users to easily
-recognize and give good error messages for new Zcash address types.
+Crypticcoin address parsing and serialization. This library allows its users to easily
+recognize and give good error messages for new Crypticcoin address types.
 
 ## License
 

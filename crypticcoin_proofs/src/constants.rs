@@ -1,4 +1,4 @@
-//! Various constants used for the Zcash proofs.
+//! Various constants used for the Crypticcoin proofs.
 
 use bls12_381::Scalar;
 use ff::Field;

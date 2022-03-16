@@ -1,3 +1,3 @@
-//! Zcash transparent extensions.
+//! Crypticcoin transparent extensions.
 
 pub mod demo;

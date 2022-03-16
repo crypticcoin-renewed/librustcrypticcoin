@@ -1,4 +1,4 @@
-//! Various constants used by the Zcash primitives.
+//! Various constants used by the Crypticcoin primitives.
 
 use ff::PrimeField;
 use group::Group;
@@ -18,29 +18,29 @@ pub const GH_FIRST_BLOCK: &[u8; 64] =
 
 // BLAKE2s invocation personalizations
 /// BLAKE2s Personalization for CRH^ivk = BLAKE2s(ak | nk)
-pub const CRH_IVK_PERSONALIZATION: &[u8; 8] = b"Zcashivk";
+pub const CRH_IVK_PERSONALIZATION: &[u8; 8] = b"Crypticcoinivk";
 
 /// BLAKE2s Personalization for PRF^nf = BLAKE2s(nk | rho)
-pub const PRF_NF_PERSONALIZATION: &[u8; 8] = b"Zcash_nf";
+pub const PRF_NF_PERSONALIZATION: &[u8; 8] = b"Crypticcoin_nf";
 
 // Group hash personalizations
 /// BLAKE2s Personalization for Pedersen hash generators.
-pub const PEDERSEN_HASH_GENERATORS_PERSONALIZATION: &[u8; 8] = b"Zcash_PH";
+pub const PEDERSEN_HASH_GENERATORS_PERSONALIZATION: &[u8; 8] = b"Crypticcoin_PH";
 
 /// BLAKE2s Personalization for the group hash for key diversification
-pub const KEY_DIVERSIFICATION_PERSONALIZATION: &[u8; 8] = b"Zcash_gd";
+pub const KEY_DIVERSIFICATION_PERSONALIZATION: &[u8; 8] = b"Crypticcoin_gd";
 
 /// BLAKE2s Personalization for the spending key base point
-pub const SPENDING_KEY_GENERATOR_PERSONALIZATION: &[u8; 8] = b"Zcash_G_";
+pub const SPENDING_KEY_GENERATOR_PERSONALIZATION: &[u8; 8] = b"Crypticcoin_G_";
 
 /// BLAKE2s Personalization for the proof generation key base point
-pub const PROOF_GENERATION_KEY_BASE_GENERATOR_PERSONALIZATION: &[u8; 8] = b"Zcash_H_";
+pub const PROOF_GENERATION_KEY_BASE_GENERATOR_PERSONALIZATION: &[u8; 8] = b"Crypticcoin_H_";
 
 /// BLAKE2s Personalization for the value commitment generator for the value
-pub const VALUE_COMMITMENT_GENERATOR_PERSONALIZATION: &[u8; 8] = b"Zcash_cv";
+pub const VALUE_COMMITMENT_GENERATOR_PERSONALIZATION: &[u8; 8] = b"Crypticcoin_cv";
 
 /// BLAKE2s Personalization for the nullifier position generator (for computing rho)
-pub const NULLIFIER_POSITION_IN_TREE_GENERATOR_PERSONALIZATION: &[u8; 8] = b"Zcash_J_";
+pub const NULLIFIER_POSITION_IN_TREE_GENERATOR_PERSONALIZATION: &[u8; 8] = b"Crypticcoin_J_";
 
 /// The prover will demonstrate knowledge of discrete log with respect to this base when
 /// they are constructing a proof, in order to authorize proof construction.

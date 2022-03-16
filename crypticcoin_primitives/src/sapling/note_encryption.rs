@@ -1,4 +1,4 @@
-//! Implementation of in-band secret distribution for Zcash transactions.
+//! Implementation of in-band secret distribution for Crypticcoin transactions.
 use blake2b_simd::{Hash as Blake2bHash, Params as Blake2bParams};
 use byteorder::{LittleEndian, WriteBytesExt};
 use ff::PrimeField;
@@ -25,12 +25,12 @@ use crate::{
     },
 };
 
-pub const KDF_SAPLING_PERSONALIZATION: &[u8; 16] = b"Zcash_SaplingKDF";
-pub const PRF_OCK_PERSONALIZATION: &[u8; 16] = b"Zcash_Derive_ock";
+pub const KDF_SAPLING_PERSONALIZATION: &[u8; 16] = b"Crypticcoin_SaplingKDF";
+pub const PRF_OCK_PERSONALIZATION: &[u8; 16] = b"Crypticcoin_Derive_ock";
 
 /// Sapling key agreement for note encryption.
 ///
-/// Implements section 5.4.4.3 of the Zcash Protocol Specification.
+/// Implements section 5.4.4.3 of the Crypticcoin Protocol Specification.
 pub fn sapling_ka_agree(esk: &jubjub::Fr, pk_d: &jubjub::ExtendedPoint) -> jubjub::SubgroupPoint {
     // [8 esk] pk_d
     // <ExtendedPoint as CofactorGroup>::clear_cofactor is implemented using
@@ -42,7 +42,7 @@ pub fn sapling_ka_agree(esk: &jubjub::Fr, pk_d: &jubjub::ExtendedPoint) -> jubju
 
 /// Sapling KDF for note encryption.
 ///
-/// Implements section 5.4.4.4 of the Zcash Protocol Specification.
+/// Implements section 5.4.4.4 of the Crypticcoin Protocol Specification.
 fn kdf_sapling(dhsecret: jubjub::SubgroupPoint, ephemeral_key: &EphemeralKeyBytes) -> Blake2bHash {
     Blake2bParams::new()
         .hash_length(32)
@@ -55,7 +55,7 @@ fn kdf_sapling(dhsecret: jubjub::SubgroupPoint, ephemeral_key: &EphemeralKeyByte
 
 /// Sapling PRF^ock.
 ///
-/// Implemented per section 5.4.2 of the Zcash Protocol Specification.
+/// Implemented per section 5.4.2 of the Crypticcoin Protocol Specification.
 pub fn prf_ock(
     ovk: &OutgoingViewingKey,
     cv: &jubjub::ExtendedPoint,
@@ -181,7 +181,7 @@ impl<P: consensus::Parameters> Domain for SaplingDomain<P> {
 
     /// Sapling KDF for note encryption.
     ///
-    /// Implements section 5.4.4.4 of the Zcash Protocol Specification.
+    /// Implements section 5.4.4.4 of the Crypticcoin Protocol Specification.
     fn kdf(dhsecret: jubjub::SubgroupPoint, epk: &EphemeralKeyBytes) -> Blake2bHash {
         kdf_sapling(dhsecret, epk)
     }
@@ -191,7 +191,7 @@ impl<P: consensus::Parameters> Domain for SaplingDomain<P> {
         to: &Self::Recipient,
         memo: &Self::Memo,
     ) -> NotePlaintextBytes {
-        // Note plaintext encoding is defined in section 5.5 of the Zcash Protocol
+        // Note plaintext encoding is defined in section 5.5 of the Crypticcoin Protocol
         // Specification.
         let mut input = [0; NOTE_PLAINTEXT_SIZE];
         input[0] = match note.rseed {

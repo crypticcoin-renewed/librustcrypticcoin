@@ -1,6 +1,6 @@
 # crypticcoin_primitives
 
-This library contains Rust implementations of the Zcash primitives.
+This library contains Rust implementations of the Crypticcoin primitives.
 
 ## License
 

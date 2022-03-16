@@ -1,4 +1,4 @@
-//! Gadget for Zcash's Pedersen hash.
+//! Gadget for Crypticcoin's Pedersen hash.
 
 use super::ecc::{EdwardsPoint, MontgomeryPoint};
 use bellman::gadgets::boolean::Boolean;

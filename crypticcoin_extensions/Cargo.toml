@@ -1,6 +1,6 @@
 [package]
 name = "crypticcoin_extensions"
-description = "Zcash Extension implementations & consensus node integration layer."
+description = "Crypticcoin Extension implementations & consensus node integration layer."
 version = "0.0.0"
 authors = ["Jack Grigg <jack@z.cash>", "Kris Nuttycombe <kris@z.cash>"]
 homepage = "https://github.com/crypticcoin-renewed/librustcrypticcoin"

@@ -12,7 +12,7 @@ use crypticcoin_primitives::{
 
 use super::compute_value_balance;
 
-/// A context object for verifying the Sapling components of a Zcash transaction.
+/// A context object for verifying the Sapling components of a Crypticcoin transaction.
 pub struct SaplingVerificationContext {
     // (sum of the Spend value commitments) - (sum of the Output value commitments)
     cv_sum: jubjub::ExtendedPoint,

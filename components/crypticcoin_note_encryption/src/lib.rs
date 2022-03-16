@@ -508,7 +508,7 @@ impl<D: Domain> NoteEncryption<D> {
 /// which the note was sent.
 ///
 /// Implements section 4.19.2 of the
-/// [Zcash Protocol Specification](https://zips.z.cash/protocol/nu5.pdf#decryptivk).
+/// [Crypticcoin Protocol Specification](https://zips.z.cash/protocol/nu5.pdf#decryptivk).
 pub fn try_note_decryption<D: Domain, Output: ShieldedOutput<D, ENC_CIPHERTEXT_SIZE>>(
     domain: &D,
     ivk: &D::IncomingViewingKey,
@@ -649,7 +649,7 @@ fn try_compact_note_decryption_inner<D: Domain, Output: ShieldedOutput<D, COMPAC
 /// If successful, the corresponding note and memo are returned, along with the address to
 /// which the note was sent.
 ///
-/// Implements [Zcash Protocol Specification section 4.19.3][decryptovk].
+/// Implements [Crypticcoin Protocol Specification section 4.19.3][decryptovk].
 ///
 /// [decryptovk]: https://zips.z.cash/protocol/nu5.pdf#decryptovk
 pub fn try_output_recovery_with_ovk<D: Domain, Output: ShieldedOutput<D, ENC_CIPHERTEXT_SIZE>>(
@@ -670,7 +670,7 @@ pub fn try_output_recovery_with_ovk<D: Domain, Output: ShieldedOutput<D, ENC_CIP
 /// which the note was sent.
 ///
 /// Implements part of section 4.19.3 of the
-/// [Zcash Protocol Specification](https://zips.z.cash/protocol/nu5.pdf#decryptovk).
+/// [Crypticcoin Protocol Specification](https://zips.z.cash/protocol/nu5.pdf#decryptovk).
 /// For decryption using a Full Viewing Key see [`try_output_recovery_with_ovk`].
 pub fn try_output_recovery_with_ock<D: Domain, Output: ShieldedOutput<D, ENC_CIPHERTEXT_SIZE>>(
     domain: &D,

@@ -123,7 +123,7 @@ impl Sub for BlockHeight {
     }
 }
 
-/// Zcash consensus parameters.
+/// Crypticcoin consensus parameters.
 pub trait Parameters: Clone {
     /// Returns the activation height for a particular network upgrade,
     /// if an activation height has been set.
@@ -161,10 +161,10 @@ pub trait Parameters: Clone {
     /// Returns the Bech32-encoded human-readable prefix for Sapling payment addresses
     /// viewing keys for the network to which this Parameters value applies.
     ///
-    /// Defined in section 5.6.4 of the [Zcash Protocol Specification].
+    /// Defined in section 5.6.4 of the [Crypticcoin Protocol Specification].
     ///
     /// [`PaymentAddress`]: crypticcoin_primitives::primitives::PaymentAddress
-    /// [Zcash Protocol Specification]: https://github.com/crypticcoin/zips/blob/master/protocol/protocol.pdf
+    /// [Crypticcoin Protocol Specification]: https://github.com/crypticcoin/zips/blob/master/protocol/protocol.pdf
     fn hrp_sapling_payment_address(&self) -> &str;
 
     /// Returns the human-readable prefix for Base58Check-encoded transparent
@@ -328,7 +328,7 @@ impl Parameters for Network {
     }
 }
 
-/// An event that occurs at a specified height on the Zcash chain, at which point the
+/// An event that occurs at a specified height on the Crypticcoin chain, at which point the
 /// consensus rules enforced by the network are altered.
 ///
 /// See [ZIP 200](https://zips.z.cash/zip-0200) for more details.
@@ -397,7 +397,7 @@ impl NetworkUpgrade {
     }
 }
 
-/// The network upgrades on the Zcash chain in order of activation.
+/// The network upgrades on the Crypticcoin chain in order of activation.
 ///
 /// This order corresponds to the activation heights, but because Rust enums are
 /// full-fledged algebraic data types, we need to define it manually.
@@ -412,7 +412,7 @@ const UPGRADES_IN_ORDER: &[NetworkUpgrade] = &[
 
 pub const ZIP212_GRACE_PERIOD: u32 = 32256;
 
-/// A globally-unique identifier for a set of consensus rules within the Zcash chain.
+/// A globally-unique identifier for a set of consensus rules within the Crypticcoin chain.
 ///
 /// Each branch ID in this enum corresponds to one of the epochs between a pair of Zcash
 /// network upgrades. For example, `BranchId::Overwinter` corresponds to the blocks

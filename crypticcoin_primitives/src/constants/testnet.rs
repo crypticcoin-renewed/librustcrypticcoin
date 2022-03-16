@@ -1,4 +1,4 @@
-//! Constants for the Zcash test network.
+//! Constants for the Crypticcoin test network.
 
 /// The testnet coin type for ZEC, as defined by [SLIP 44].
 ///
@@ -19,15 +19,15 @@ pub const HRP_SAPLING_EXTENDED_SPENDING_KEY: &str = "secret-extended-key-test";
 ///
 /// [`ExtendedFullViewingKey`]: crate::zip32::ExtendedFullViewingKey
 /// [ZIP 32]: https://github.com/crypticcoin/zips/blob/master/zip-0032.rst
-pub const HRP_SAPLING_EXTENDED_FULL_VIEWING_KEY: &str = "zxviewtestsapling";
+pub const HRP_SAPLING_EXTENDED_FULL_VIEWING_KEY: &str = "cxviewtestsapling";
 
 /// The HRP for a Bech32-encoded testnet [`PaymentAddress`].
 ///
-/// Defined in section 5.6.4 of the [Zcash Protocol Specification].
+/// Defined in section 5.6.4 of the [Crypticcoin Protocol Specification].
 ///
 /// [`PaymentAddress`]: crate::sapling::PaymentAddress
-/// [Zcash Protocol Specification]: https://github.com/crypticcoin/zips/blob/master/protocol/protocol.pdf
-pub const HRP_SAPLING_PAYMENT_ADDRESS: &str = "ztestsapling";
+/// [Crypticcoin Protocol Specification]: https://github.com/crypticcoin/zips/blob/master/protocol/protocol.pdf
+pub const HRP_SAPLING_PAYMENT_ADDRESS: &str = "ctestsapling";
 
 /// The prefix for a Base58Check-encoded testnet [`TransparentAddress::PublicKey`].
 ///

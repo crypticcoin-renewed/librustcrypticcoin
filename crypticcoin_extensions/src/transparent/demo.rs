@@ -336,7 +336,7 @@ pub struct DemoBuilder<B> {
 
     /// The assigned identifier for this extension. This is necessary as the author
     /// of the demo extension will not know ahead of time what identifier will be
-    /// assigned to it at the time of inclusion in the Zcash consensus rules.
+    /// assigned to it at the time of inclusion in the Crypticcoin consensus rules.
     pub extension_id: u32,
 }
 

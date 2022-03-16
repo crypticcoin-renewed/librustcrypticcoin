@@ -1,4 +1,4 @@
-//! Chain history library for Zcash
+//! Chain history library for Crypticcoin
 //!
 //! To be used in zebra and via FFI bindings in crypticcoind
 

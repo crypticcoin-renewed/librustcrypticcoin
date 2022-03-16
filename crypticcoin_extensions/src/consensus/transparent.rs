@@ -1,4 +1,4 @@
-//! Consensus logic for Transparent Zcash Extensions.
+//! Consensus logic for Transparent Crypticcoin Extensions.
 
 use std::convert::TryFrom;
 use crypticcoin_primitives::consensus::{BlockHeight, BranchId};
@@ -12,7 +12,7 @@ use crate::transparent::demo;
 /// Wire value for the demo extension identifier.
 pub const EXTENSION_DEMO: u32 = 0;
 
-/// The set of programs that have assigned type IDs within the Zcash consensus rules.
+/// The set of programs that have assigned type IDs within the Crypticcoin consensus rules.
 #[derive(Debug, Clone, Copy)]
 pub enum ExtensionId {
     Demo,

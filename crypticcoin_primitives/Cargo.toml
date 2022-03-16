@@ -1,6 +1,6 @@
 [package]
 name = "crypticcoin_primitives"
-description = "Rust implementations of the Zcash primitives"
+description = "Rust implementations of the Crypticcoin primitives"
 version = "0.5.0"
 authors = [
     "Jack Grigg <jack@z.cash>",

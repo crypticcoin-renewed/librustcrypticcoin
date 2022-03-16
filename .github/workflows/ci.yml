@@ -20,12 +20,12 @@ jobs:
       - name: Fetch path to Crypticcoin parameters
         working-directory: ./crypticcoin_proofs
         shell: bash
-        run: echo "ZCASH_PARAMS=$(cargo run --release --example get-params-path --features directories)" >> $GITHUB_ENV
+        run: echo "CRYPTICCOIN_PARAMS=$(cargo run --release --example get-params-path --features directories)" >> $GITHUB_ENV
       - name: Cache Crypticcoin parameters
         id: cache-params
         uses: actions/cache@v2
         with:
-          path: ${{ env.ZCASH_PARAMS }}
+          path: ${{ env.CRYPTICCOIN_PARAMS }}
           key: ${{ runner.os }}-params
       - name: Fetch Crypticcoin parameters
         if: steps.cache-params.outputs.cache-hit != 'true'
@@ -145,12 +145,12 @@ jobs:
       - name: Fetch path to Crypticcoin parameters
         working-directory: ./crypticcoin_proofs
         shell: bash
-        run: echo "ZCASH_PARAMS=$(cargo run --release --example get-params-path --features directories)" >> $GITHUB_ENV
+        run: echo "CRYPTICCOIN_PARAMS=$(cargo run --release --example get-params-path --features directories)" >> $GITHUB_ENV
       - name: Cache Crypticcoin parameters
         id: cache-params
         uses: actions/cache@v2
         with:
-          path: ${{ env.ZCASH_PARAMS }}
+          path: ${{ env.CRYPTICCOIN_PARAMS }}
           key: ${{ runner.os }}-params
       - name: Fetch Crypticcoin parameters
         if: steps.cache-params.outputs.cache-hit != 'true'

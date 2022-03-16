@@ -1,6 +1,6 @@
 //! Sapling key components.
 //!
-//! Implements [section 4.2.2] of the Zcash Protocol Specification.
+//! Implements [section 4.2.2] of the Crypticcoin Protocol Specification.
 //!
 //! [section 4.2.2]: https://zips.z.cash/protocol/protocol.pdf#saplingkeycomponents
 

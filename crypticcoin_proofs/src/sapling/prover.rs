@@ -20,7 +20,7 @@ use crypticcoin_primitives::{
 use super::compute_value_balance;
 use crate::circuit::sapling::{Output, Spend};
 
-/// A context object for creating the Sapling components of a Zcash transaction.
+/// A context object for creating the Sapling components of a Crypticcoin transaction.
 pub struct SaplingProvingContext {
     bsk: jubjub::Fr,
     // (sum of the Spend value commitments) - (sum of the Output value commitments)

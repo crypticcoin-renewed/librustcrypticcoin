@@ -1,6 +1,6 @@
 # crypticcoin_proofs
 
-This library contains the zk-SNARK circuits for Zcash, and the APIs for creating
+This library contains the zk-SNARK circuits for Crypticcoin, and the APIs for creating
 and verifying proofs.
 
 ## License

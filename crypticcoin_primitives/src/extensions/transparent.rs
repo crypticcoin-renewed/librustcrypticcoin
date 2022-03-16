@@ -1,4 +1,4 @@
-//! Core traits and structs for Transparent Zcash Extensions.
+//! Core traits and structs for Transparent Crypticcoin Extensions.
 
 use std::fmt;
 
@@ -114,7 +114,7 @@ impl<E: fmt::Display> fmt::Display for Error<E> {
 }
 
 /// This is the primary trait which must be implemented by an extension type for that type to be
-/// eligible for inclusion in Zcash consensus rules.
+/// eligible for inclusion in Crypticcoin consensus rules.
 pub trait Extension<C> {
     /// Extension-specific precondition type. The extension will need to implement
     /// [`FromPayload<Error = Self::Error>`] for this type in order for their extension to be

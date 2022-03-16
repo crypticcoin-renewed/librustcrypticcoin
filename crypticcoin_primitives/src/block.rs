@@ -1,4 +1,4 @@
-//! Structs and methods for handling Zcash block headers.
+//! Structs and methods for handling Crypticcoin block headers.
 
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use sha2::{Digest, Sha256};
@@ -34,7 +34,7 @@ impl BlockHash {
     }
 }
 
-/// A Zcash block header.
+/// A Crypticcoin block header.
 pub struct BlockHeader {
     hash: BlockHash,
     data: BlockHeaderData,

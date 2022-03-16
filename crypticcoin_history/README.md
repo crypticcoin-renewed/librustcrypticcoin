@@ -1,6 +1,6 @@
 # crypticcoin_history
 
-Special implementation of Merkle mountain ranges (MMR) for Zcash!
+Special implementation of Merkle mountain ranges (MMR) for Crypticcoin!
 
 [![Build Status](https://travis-ci.org/NikVolf/crypticcoin-mmr.svg?branch=master)](https://travis-ci.org/NikVolf/crypticcoin-mmr)
 

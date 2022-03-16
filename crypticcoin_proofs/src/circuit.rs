@@ -1,4 +1,4 @@
-//! Implementations of the Zcash circuits and Zcash-specific gadgets.
+//! Implementations of the Crypticcoin circuits and Crypticcoin-specific gadgets.
 
 pub mod ecc;
 pub mod pedersen_hash;

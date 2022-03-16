@@ -21,9 +21,9 @@ use crate::{
     sapling::keys::{ExpandedSpendingKey, FullViewingKey},
 };
 
-pub const ZIP32_SAPLING_MASTER_PERSONALIZATION: &[u8; 16] = b"ZcashIP32Sapling";
-pub const ZIP32_SAPLING_FVFP_PERSONALIZATION: &[u8; 16] = b"ZcashSaplingFVFP";
-pub const ZIP32_SAPLING_INT_PERSONALIZATION: &[u8; 16] = b"Zcash_SaplingInt";
+pub const ZIP32_SAPLING_MASTER_PERSONALIZATION: &[u8; 16] = b"CrypticcoinIP32Sapling";
+pub const ZIP32_SAPLING_FVFP_PERSONALIZATION: &[u8; 16] = b"CrypticcoinSaplingFVFP";
+pub const ZIP32_SAPLING_INT_PERSONALIZATION: &[u8; 16] = b"Crypticcoin_SaplingInt";
 
 /// A type-safe wrapper for account identifiers.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]

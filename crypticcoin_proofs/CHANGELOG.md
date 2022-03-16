@@ -23,14 +23,14 @@ and this library adheres to Rust's notion of
 
 ## [0.5.0] - 2021-03-26
 ### Added
-- `crypticcoin_proofs::ZcashParameters`
+- `crypticcoin_proofs::CrypticcoinParameters`
 - `crypticcoin_proofs::parse_parameters`
 - `crypticcoin_proofs::prover::LocalProver::from_bytes`
 - The `crypticcoin_proofs::constants` module, containing constants and helpers used by
   the `crypticcoin_proofs::circuit::ecc::fixed_base_multiplication` gadget:
   - The `FixedGeneratorOwned` type alias.
   - `generate_circuit_generator`
-  - The six Zcash fixed generators:
+  - The six Crypticcoin fixed generators:
     - `PROOF_GENERATION_KEY_GENERATOR`
     - `NOTE_COMMITMENT_RANDOMNESS_GENERATOR`
     - `NULLIFIER_POSITION_GENERATOR`
@@ -42,7 +42,7 @@ and this library adheres to Rust's notion of
 
 ### Changed
 - MSRV is now 1.47.0.
-- `crypticcoin_proofs::load_parameters` now returns `ZcashParameters`.
+- `crypticcoin_proofs::load_parameters` now returns `CrypticcoinParameters`.
 
 ## [0.4.0] - 2020-09-09
 ### Changed

@@ -1,4 +1,4 @@
-//! Constants for the Zcash main network.
+//! Constants for the Crypticcoin main network.
 
 /// The mainnet coin type for ZEC, as defined by [SLIP 44].
 ///
@@ -19,14 +19,14 @@ pub const HRP_SAPLING_EXTENDED_SPENDING_KEY: &str = "secret-extended-key-main";
 ///
 /// [`ExtendedFullViewingKey`]: crate::zip32::ExtendedFullViewingKey
 /// [ZIP 32]: https://github.com/crypticcoin/zips/blob/master/zip-0032.rst
-pub const HRP_SAPLING_EXTENDED_FULL_VIEWING_KEY: &str = "zxviews";
+pub const HRP_SAPLING_EXTENDED_FULL_VIEWING_KEY: &str = "cxviews";
 
 /// The HRP for a Bech32-encoded mainnet [`PaymentAddress`].
 ///
-/// Defined in section 5.6.4 of the [Zcash Protocol Specification].
+/// Defined in section 5.6.4 of the [Crypticcoin Protocol Specification].
 ///
 /// [`PaymentAddress`]: crate::sapling::PaymentAddress
-/// [Zcash Protocol Specification]: https://github.com/crypticcoin/zips/blob/master/protocol/protocol.pdf
+/// [Crypticcoin Protocol Specification]: https://github.com/crypticcoin/zips/blob/master/protocol/protocol.pdf
 pub const HRP_SAPLING_PAYMENT_ADDRESS: &str = "zs";
 
 /// The prefix for a Base58Check-encoded mainnet [`TransparentAddress::PublicKey`].
