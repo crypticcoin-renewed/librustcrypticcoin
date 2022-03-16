@@ -25,7 +25,7 @@ fn write_scalar<W: Write>(s: &jubjub::Fr, mut writer: W) -> io::Result<()> {
 }
 
 fn h_star(a: &[u8], b: &[u8]) -> jubjub::Fr {
-    hash_to_scalar(b"Crypticcoin_RedJubjubH", a, b)
+    hash_to_scalar(b"Crypt_RedJubjubH", a, b)
 }
 
 #[derive(Copy, Clone, Debug)]

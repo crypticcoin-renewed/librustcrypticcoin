@@ -20,7 +20,7 @@ fn blake2b_personal(personalization: &[u8], input: &[u8]) -> [u8; 32] {
 
 fn personalization(branch_id: u32) -> [u8; 16] {
     let mut result = [0u8; 16];
-    result[..12].copy_from_slice(b"CrypticcoinHistory");
+    result[..12].copy_from_slice(b"CryptHistory");
     LittleEndian::write_u32(&mut result[12..], branch_id);
     result
 }

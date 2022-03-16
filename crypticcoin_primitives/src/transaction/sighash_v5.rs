@@ -24,7 +24,7 @@ use crypticcoin_encoding::{CompactSize, Vector};
 #[cfg(feature = "zfuture")]
 use crate::transaction::{components::tze, sighash::TzeInput, TzeDigests};
 
-const CRYPTICCOIN_TRANSPARENT_INPUT_HASH_PERSONALIZATION: &[u8; 16] = b"Crypticcoin___TxInHash";
+const CRYPTICCOIN_TRANSPARENT_INPUT_HASH_PERSONALIZATION: &[u8; 16] = b"Crypt___TxInHash";
 
 #[cfg(feature = "zfuture")]
 const CRYPTICCOIN_TZE_INPUT_HASH_PERSONALIZATION: &[u8; 16] = b"Zcash__TzeInHash";

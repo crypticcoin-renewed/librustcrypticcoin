@@ -27,14 +27,14 @@ pub const HRP_SAPLING_EXTENDED_FULL_VIEWING_KEY: &str = "cxviews";
 ///
 /// [`PaymentAddress`]: crate::sapling::PaymentAddress
 /// [Crypticcoin Protocol Specification]: https://github.com/crypticcoin/zips/blob/master/protocol/protocol.pdf
-pub const HRP_SAPLING_PAYMENT_ADDRESS: &str = "zs";
+pub const HRP_SAPLING_PAYMENT_ADDRESS: &str = "cs";
 
 /// The prefix for a Base58Check-encoded mainnet [`TransparentAddress::PublicKey`].
 ///
 /// [`TransparentAddress::PublicKey`]: crate::legacy::TransparentAddress::PublicKey
-pub const B58_PUBKEY_ADDRESS_PREFIX: [u8; 2] = [0x1c, 0xb8];
+pub const B58_PUBKEY_ADDRESS_PREFIX: [u8; 2] = [0x13, 0xb6];
 
 /// The prefix for a Base58Check-encoded mainnet [`TransparentAddress::Script`].
 ///
 /// [`TransparentAddress::Script`]: crate::legacy::TransparentAddress::Script
-pub const B58_SCRIPT_ADDRESS_PREFIX: [u8; 2] = [0x1c, 0xbd];
+pub const B58_SCRIPT_ADDRESS_PREFIX: [u8; 2] = [0x13, 0xbb];

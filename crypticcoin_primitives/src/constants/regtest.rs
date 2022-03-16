@@ -23,7 +23,7 @@ pub const HRP_SAPLING_EXTENDED_SPENDING_KEY: &str = "secret-extended-key-regtest
 ///
 /// [`ExtendedFullViewingKey`]: crate::zip32::ExtendedFullViewingKey
 /// [the `crypticcoind` codebase]: <https://github.com/crypticcoin/crypticcoin/blob/128d863fb8be39ee294fda397c1ce3ba3b889cb2/src/chainparams.cpp#L494>
-pub const HRP_SAPLING_EXTENDED_FULL_VIEWING_KEY: &str = "zxviewregtestsapling";
+pub const HRP_SAPLING_EXTENDED_FULL_VIEWING_KEY: &str = "cxviewregtestsapling";
 
 /// The HRP for a Bech32-encoded regtest [`PaymentAddress`].
 ///
@@ -31,7 +31,7 @@ pub const HRP_SAPLING_EXTENDED_FULL_VIEWING_KEY: &str = "zxviewregtestsapling";
 ///
 /// [`PaymentAddress`]: crate::sapling::PaymentAddress
 /// [the `crypticcoind` codebase]: <https://github.com/crypticcoin/crypticcoin/blob/128d863fb8be39ee294fda397c1ce3ba3b889cb2/src/chainparams.cpp#L493>
-pub const HRP_SAPLING_PAYMENT_ADDRESS: &str = "zregtestsapling";
+pub const HRP_SAPLING_PAYMENT_ADDRESS: &str = "cregtestsapling";
 
 /// The prefix for a Base58Check-encoded regtest [`TransparentAddress::PublicKey`].
 /// Same as the testnet prefix.
