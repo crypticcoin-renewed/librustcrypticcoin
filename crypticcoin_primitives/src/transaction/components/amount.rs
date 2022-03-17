@@ -5,11 +5,11 @@ use std::ops::{Add, AddAssign, Neg, Sub, SubAssign};
 use orchard::value as orchard;
 
 pub const COIN: i64 = 1_0000_0000;
-pub const MAX_MONEY: i64 = 21_000_000 * COIN;
+pub const MAX_MONEY: i64 = 7_728_000_000 * COIN;
 
 pub const DEFAULT_FEE: Amount = Amount(1000);
 
-/// A type-safe representation of some quantity of Zcash.
+/// A type-safe representation of some quantity of Crypticcoin.
 ///
 /// An Amount can only be constructed from an integer that is within the valid monetary
 /// range of `{-MAX_MONEY..MAX_MONEY}` (where `MAX_MONEY` = 21,000,000 × 10⁸ zatoshis).
@@ -208,6 +208,11 @@ impl Neg for Amount {
     }
 }
 
+impl From<Amount> for orchard::ValueSum {
+    fn from(v: Amount) -> Self {
+        orchard::ValueSum::from_raw(v.0)
+    }
+}
 
 impl TryFrom<orchard::ValueSum> for Amount {
     type Error = ();
