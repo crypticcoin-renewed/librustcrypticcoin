@@ -25,8 +25,8 @@ use crate::{
     },
 };
 
-pub const KDF_SAPLING_PERSONALIZATION: &[u8; 16] = b"Zcash_SaplingKDF";
-pub const PRF_OCK_PERSONALIZATION: &[u8; 16] = b"Zcash_Derive_ock";
+pub const KDF_SAPLING_PERSONALIZATION: &[u8; 16] = b"Crypt_SaplingKDF";
+pub const PRF_OCK_PERSONALIZATION: &[u8; 16] = b"Crypt_Derive_ock";
 
 /// Sapling key agreement for note encryption.
 ///
