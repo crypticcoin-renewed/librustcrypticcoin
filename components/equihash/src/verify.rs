@@ -149,7 +149,7 @@ impl fmt::Display for Kind {
 }
 
 fn initialise_state(n: u32, k: u32, digest_len: u8) -> Blake2bState {
-    let mut personalization: Vec<u8> = Vec::from("CryptPoW");
+    let mut personalization: Vec<u8> = Vec::from("ZcashPoW");
     personalization.write_u32::<LittleEndian>(n).unwrap();
     personalization.write_u32::<LittleEndian>(k).unwrap();
 
