@@ -1,15 +1,15 @@
-//! Note encryption for Crypticcoin transactions.
+//! Note encryption for Zcash transactions.
 //!
 //! This crate implements the [in-band secret distribution scheme] for the Sapling and
 //! Orchard protocols. It provides reusable methods that implement common note encryption
 //! and trial decryption logic, and enforce protocol-agnostic verification requirements.
 //!
 //! Protocol-specific logic is handled via the [`Domain`] trait. Implementations of this
-//! trait are provided in the [`crypticcoin_primitives`] (for Sapling) and [`orchard`] crates;
+//! trait are provided in the [`zcash_primitives`] (for Sapling) and [`orchard`] crates;
 //! users with their own existing types can similarly implement the trait themselves.
 //!
 //! [in-band secret distribution scheme]: https://zips.z.cash/protocol/protocol.pdf#saplingandorchardinband
-//! [`crypticcoin_primitives`]: https://crates.io/crates/crypticcoin_primitives
+//! [`zcash_primitives`]: https://crates.io/crates/zcash_primitives
 //! [`orchard`]: https://crates.io/crates/orchard
 
 #![no_std]
@@ -176,10 +176,10 @@ pub trait Domain {
     ///
     /// The `recipient` argument is present as a secondary way to obtain the diversifier;
     /// this is due to a historical quirk of how the Sapling `Note` struct was implemented
-    /// in the `crypticcoin_primitives` crate. `recipient` will be removed from this method in a
-    /// future crate release, once [`crypticcoin_primitives` has been refactored].
+    /// in the `zcash_primitives` crate. `recipient` will be removed from this method in a
+    /// future crate release, once [`zcash_primitives` has been refactored].
     ///
-    /// [`crypticcoin_primitives` has been refactored]: https://github.com/crypticcoin-renewed/librustcrypticcoin/issues/454
+    /// [`zcash_primitives` has been refactored]: https://github.com/zcash/librustzcash/issues/454
     fn note_plaintext_bytes(
         note: &Self::Note,
         recipient: &Self::Recipient,
@@ -339,7 +339,7 @@ pub trait ShieldedOutput<D: Domain, const CIPHERTEXT_SIZE: usize> {
 /// consistent with each other.
 ///
 /// Implements section 4.19 of the
-/// [Crypticcoin Protocol Specification](https://zips.z.cash/protocol/nu5.pdf#saplingandorchardinband)
+/// [Zcash Protocol Specification](https://zips.z.cash/protocol/nu5.pdf#saplingandorchardinband)
 /// NB: the example code is only covering the post-Canopy case.
 ///
 /// # Examples
@@ -347,11 +347,11 @@ pub trait ShieldedOutput<D: Domain, const CIPHERTEXT_SIZE: usize> {
 /// ```
 /// extern crate ff;
 /// extern crate rand_core;
-/// extern crate crypticcoin_primitives;
+/// extern crate zcash_primitives;
 ///
 /// use ff::Field;
 /// use rand_core::OsRng;
-/// use crypticcoin_primitives::{
+/// use zcash_primitives::{
 ///     keys::{OutgoingViewingKey, prf_expand},
 ///     consensus::{TEST_NETWORK, TestNetwork, NetworkUpgrade, Parameters},
 ///     memo::MemoBytes,
@@ -475,7 +475,7 @@ impl<D: Domain> NoteEncryption<D> {
         rng: &mut R,
     ) -> [u8; OUT_CIPHERTEXT_SIZE] {
         let (ock, input) = if let Some(ovk) = &self.ovk {
-            let ock = D::derive_ock(ovk, &cv, &cmstar.into(), &D::epk_bytes(&self.epk));
+            let ock = D::derive_ock(ovk, cv, &cmstar.into(), &D::epk_bytes(&self.epk));
             let input = D::outgoing_plaintext_bytes(&self.note, &self.esk);
 
             (ock, input)
@@ -508,7 +508,7 @@ impl<D: Domain> NoteEncryption<D> {
 /// which the note was sent.
 ///
 /// Implements section 4.19.2 of the
-/// [Crypticcoin Protocol Specification](https://zips.z.cash/protocol/nu5.pdf#decryptivk).
+/// [Zcash Protocol Specification](https://zips.z.cash/protocol/nu5.pdf#decryptivk).
 pub fn try_note_decryption<D: Domain, Output: ShieldedOutput<D, ENC_CIPHERTEXT_SIZE>>(
     domain: &D,
     ivk: &D::IncomingViewingKey,
@@ -563,7 +563,7 @@ fn parse_note_plaintext_without_memo_ivk<D: Domain>(
     cmstar_bytes: &D::ExtractedCommitmentBytes,
     plaintext: &[u8],
 ) -> Option<(D::Note, D::Recipient)> {
-    let (note, to) = domain.parse_note_plaintext_without_memo_ivk(ivk, &plaintext)?;
+    let (note, to) = domain.parse_note_plaintext_without_memo_ivk(ivk, plaintext)?;
 
     if let NoteValidity::Valid = check_note_validity::<D>(&note, ephemeral_key, cmstar_bytes) {
         Some((note, to))
@@ -577,10 +577,10 @@ fn check_note_validity<D: Domain>(
     ephemeral_key: &EphemeralKeyBytes,
     cmstar_bytes: &D::ExtractedCommitmentBytes,
 ) -> NoteValidity {
-    if &D::ExtractedCommitmentBytes::from(&D::cmstar(&note)) == cmstar_bytes {
+    if &D::ExtractedCommitmentBytes::from(&D::cmstar(note)) == cmstar_bytes {
         if let Some(derived_esk) = D::derive_esk(note) {
-            if D::epk_bytes(&D::ka_derive_public(&note, &derived_esk))
-                .ct_eq(&ephemeral_key)
+            if D::epk_bytes(&D::ka_derive_public(note, &derived_esk))
+                .ct_eq(ephemeral_key)
                 .into()
             {
                 NoteValidity::Valid
@@ -614,7 +614,7 @@ pub fn try_compact_note_decryption<D: Domain, Output: ShieldedOutput<D, COMPACT_
     let ephemeral_key = output.ephemeral_key();
 
     let epk = D::epk(&ephemeral_key)?;
-    let shared_secret = D::ka_agree_dec(&ivk, &epk);
+    let shared_secret = D::ka_agree_dec(ivk, &epk);
     let key = D::kdf(shared_secret, &ephemeral_key);
 
     try_compact_note_decryption_inner(domain, ivk, &ephemeral_key, output, key)
@@ -649,7 +649,7 @@ fn try_compact_note_decryption_inner<D: Domain, Output: ShieldedOutput<D, COMPAC
 /// If successful, the corresponding note and memo are returned, along with the address to
 /// which the note was sent.
 ///
-/// Implements [Crypticcoin Protocol Specification section 4.19.3][decryptovk].
+/// Implements [Zcash Protocol Specification section 4.19.3][decryptovk].
 ///
 /// [decryptovk]: https://zips.z.cash/protocol/nu5.pdf#decryptovk
 pub fn try_output_recovery_with_ovk<D: Domain, Output: ShieldedOutput<D, ENC_CIPHERTEXT_SIZE>>(
@@ -659,7 +659,7 @@ pub fn try_output_recovery_with_ovk<D: Domain, Output: ShieldedOutput<D, ENC_CIP
     cv: &D::ValueCommitment,
     out_ciphertext: &[u8; OUT_CIPHERTEXT_SIZE],
 ) -> Option<(D::Note, D::Recipient, D::Memo)> {
-    let ock = D::derive_ock(ovk, &cv, &output.cmstar_bytes(), &output.ephemeral_key());
+    let ock = D::derive_ock(ovk, cv, &output.cmstar_bytes(), &output.ephemeral_key());
     try_output_recovery_with_ock(domain, &ock, output, out_ciphertext)
 }
 
@@ -670,7 +670,7 @@ pub fn try_output_recovery_with_ovk<D: Domain, Output: ShieldedOutput<D, ENC_CIP
 /// which the note was sent.
 ///
 /// Implements part of section 4.19.3 of the
-/// [Crypticcoin Protocol Specification](https://zips.z.cash/protocol/nu5.pdf#decryptovk).
+/// [Zcash Protocol Specification](https://zips.z.cash/protocol/nu5.pdf#decryptovk).
 /// For decryption using a Full Viewing Key see [`try_output_recovery_with_ovk`].
 pub fn try_output_recovery_with_ock<D: Domain, Output: ShieldedOutput<D, ENC_CIPHERTEXT_SIZE>>(
     domain: &D,
@@ -729,7 +729,7 @@ pub fn try_output_recovery_with_ock<D: Domain, Output: ShieldedOutput<D, ENC_CIP
     }
 
     if let NoteValidity::Valid =
-        check_note_validity::<D>(&note, &ephemeral_key, &output.cmstar_bytes())
+    check_note_validity::<D>(&note, &ephemeral_key, &output.cmstar_bytes())
     {
         Some((note, to, memo))
     } else {

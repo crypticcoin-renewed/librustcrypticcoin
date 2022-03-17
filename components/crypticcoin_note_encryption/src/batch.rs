@@ -34,8 +34,8 @@ fn batch_note_decryption<D: BatchDomain, Output: ShieldedOutput<D, CS>, F, FR, c
     outputs: &[(D, Output)],
     decrypt_inner: F,
 ) -> Vec<Option<FR>>
-where
-    F: Fn(&D, &D::IncomingViewingKey, &EphemeralKeyBytes, &Output, D::SymmetricKey) -> Option<FR>,
+    where
+        F: Fn(&D, &D::IncomingViewingKey, &EphemeralKeyBytes, &Output, D::SymmetricKey) -> Option<FR>,
 {
     // Fetch the ephemeral keys for each output and batch-parse them.
     let ephemeral_keys = D::batch_epk(outputs.iter().map(|(_, output)| output.ephemeral_key()));
