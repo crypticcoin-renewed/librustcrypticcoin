@@ -19,6 +19,7 @@ panic = 'abort'
 codegen-units = 1
 
 [patch.crates-io]
+orchard = { git = "https://github.com/crypticcoin-renewed/orchard.git", rev = "1773091cbba97bd40a6f388e0ac9339592c7a950" }
 crypticcoin_encoding = { path = "components/crypticcoin_encoding" }
 crypticcoin_note_encryption = { path = "components/crypticcoin_note_encryption" }
 hdwallet = { git = "https://github.com/nuttycom/hdwallet", rev = "576683b9f2865f1118c309017ff36e01f84420c9" }
